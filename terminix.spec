@@ -1,11 +1,11 @@
 Summary: A tiling terminal emulator based on GTK+ 3
 Name:terminix
-Version: 0.51.0
+Version: 0.51.2
 Release: 1%{dist}
 License: MPL
 Group: Applications/Utilities
 
-Source: https://github.com/gnunn1/terminix/releases/download/%{version}/terminix.zip
+Source0: terminix-%{version}.tar.gz
 URL: http://github.com/gnunn1/terminix
 
 BuildRequires: gtk3-devel
@@ -64,3 +64,9 @@ unzip -x -d %buildroot %{SOURCE0}
 /usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
 
 %changelog
+* Wed Mar 02 2016 Simone Del Prete <simone.delprete@bspa.it> 0.51.2-1
+- new package built with tito
+
+* Wed Mar 02 2016 Simone Del Prete <simone.delprete@bspa.it> 0.51.1-1
+- new package built with tito
+
