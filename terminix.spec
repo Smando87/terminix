@@ -1,7 +1,7 @@
 Summary: A tiling terminal emulator based on GTK+ 3
 Name:terminix
-Version: 0.51.2
-Release: 1%{dist}
+Version: 0.51.0
+Release: 2%{dist}
 License: MPL
 Group: Applications/Utilities
 
@@ -64,6 +64,10 @@ unzip -x -d %buildroot %{SOURCE0}
 /usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
 
 %changelog
+* Thu Mar 03 2016 Simone Del Prete <simone.delprete@bspa.it> 0.51.0-2
+- Look at dimming unfocused terminals (gerald.b.nunn@gmail.com)
+- Fix #119 (gerald.b.nunn@gmail.com)
+
 * Wed Mar 02 2016 Simone Del Prete <simone.delprete@bspa.it> 0.51.2-1
 - new package built with tito
 
