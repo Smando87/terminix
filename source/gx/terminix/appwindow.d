@@ -12,6 +12,7 @@ import std.file;
 import std.math;
 import std.format;
 import std.json;
+import std.string;
 
 import cairo.Context;
 
@@ -95,6 +96,7 @@ private:
     enum ACTION_SESSION_NEXT_TERMINAL = "switch-to-next-terminal";
     enum ACTION_SESSION_PREV_TERMINAL = "switch-to-previous-terminal";
     enum ACTION_SESSION_TERMINAL_X = "switch-to-terminal-";
+    enum ACTION_RESIZE_TERMINAL_DIRECTION = "resize-terminal-";
     enum ACTION_SESSION_SAVE = "save";
     enum ACTION_SESSION_SAVE_AS = "save-as";
     enum ACTION_SESSION_LOAD = "load";
@@ -102,6 +104,8 @@ private:
     enum ACTION_WIN_SESSION_X = "switch-to-session-";
     enum ACTION_WIN_FULLSCREEN = "fullscreen";
     enum ACTION_WIN_SIDEBAR = "view-sidebar";
+    enum ACTION_WIN_NEXT_SESSION = "switch-to-next-session";
+    enum ACTION_WIN_PREVIOUS_SESSION = "switch-to-previous-session";
 
     Notebook nb;
     HeaderBar hb;
@@ -130,19 +134,18 @@ private:
         //Notebook
         nb = new Notebook();
         nb.setShowTabs(false);
-        nb.addOnSwitchPage(delegate(Widget page, uint pageNo, Notebook) {
+        nb.setShowBorder(false);
+        nb.addOnSwitchPage(delegate(Widget page, uint, Notebook) {
             trace("Switched Sessions");
             Session session = cast(Session) page;
             //Remove any sessions associated with current page
             sessionNotifications.remove(session.sessionUUID);
-            updateTitle(session);
+            updateTitle();
             updateUIState();
             session.focusRestore();
             saSyncInput.setState(new GVariant(session.synchronizeInput));
         }, ConnectFlags.AFTER);
 
-        Overlay overlay = new Overlay();
-        add(overlay);
         sb = new SideBar();
         sb.addOnSessionSelected(delegate(string sessionUUID) {
             trace("Session selected " ~ sessionUUID);
@@ -153,6 +156,9 @@ private:
                 getCurrentSession().focusRestore();
             }
         });
+
+        Overlay overlay = new Overlay();
+        overlay.add(nb);
         overlay.addOverlay(sb);
 
         //Could be a Box or a Headerbar depending on value of disable_csd
@@ -161,11 +167,11 @@ private:
         if (gsSettings.getBoolean(SETTINGS_DISABLE_CSD_KEY)) {
             Box b = new Box(Orientation.VERTICAL, 0);
             b.add(toolbar);
-            b.add(nb);
-            overlay.add(b);
+            b.add(overlay);
+            add(b);
         } else {
             this.setTitlebar(toolbar);
-            overlay.add(nb);
+            add(overlay);
         }
     }
 
@@ -183,7 +189,7 @@ private:
         Button btnNew = new Button("tab-new-symbolic", IconSize.BUTTON);
         btnNew.setFocusOnClick(false);
         btnNew.setAlwaysShowImage(true);
-        btnNew.addOnClicked(delegate(Button button) { createSession(); });
+        btnNew.addOnClicked(delegate(Button) { createSession(); });
         btnNew.setTooltipText(_("Create a new session"));
 
         //Session Actions
@@ -204,10 +210,6 @@ private:
             spacer.getStyleContext().addClass("terminix-toolbar");
             spacer.packStart(tb, true, true, 0);
 
-            Box b = new Box(Orientation.VERTICAL, 0);
-            b.add(spacer);
-            b.add(nb);
-            add(b);
             return spacer;
         } else {
             //Header Bar
@@ -225,16 +227,39 @@ private:
      * Create Window actions
      */
     void createWindowActions(GSettings gsShortcuts) {
+        static if (SHOW_DEBUG_OPTIONS) {
+            registerAction(this, "win", "gc", null, delegate(GVariant, SimpleAction) { trace("Performing collection"); core.memory.GC.collect(); });
+        }
+
         //Create Switch to Session (0..9) actions
         //Can't use :: action targets for this since action name needs to be preferences 
         for (int i = 0; i <= 9; i++) {
             registerActionWithSettings(this, "win", ACTION_WIN_SESSION_X ~ to!string(i), gsShortcuts, delegate(GVariant, SimpleAction sa) {
                 int index = to!int(sa.getName()[$ - 1 .. $]);
+                if (index == 0)
+                    index = 9;
+                else
+                    index--;
                 if (index <= nb.getNPages()) {
                     nb.setCurrentPage(index);
                 }
             });
         }
+
+        registerActionWithSettings(this, "win", ACTION_WIN_NEXT_SESSION, gsShortcuts, delegate(GVariant, SimpleAction) {
+            if (nb.getCurrentPage() < nb.getNPages() - 1) {
+                nb.nextPage();
+            } else {
+                nb.setCurrentPage(0);
+            }
+        });
+        registerActionWithSettings(this, "win", ACTION_WIN_PREVIOUS_SESSION, gsShortcuts, delegate(GVariant, SimpleAction) {
+            if (nb.getCurrentPage() > 0) {
+                nb.prevPage();
+            } else {
+                nb.setCurrentPage(nb.getNPages() - 1);
+            }
+        });
 
         registerActionWithSettings(this, "win", ACTION_WIN_FULLSCREEN, gsShortcuts, delegate(GVariant value, SimpleAction sa) {
             trace("Setting fullscreen");
@@ -254,9 +279,9 @@ private:
             // handling, don't trigger UI activity until after it is done
             // See comments in gx.gtk.cairo.getWidgetImage
             if (newState) {
-                trace("Toggle sidebar on");
                 sb.populateSessions(getSessions(), getCurrentSession().sessionUUID, sessionNotifications, nb.getAllocatedWidth(), nb.getAllocatedHeight());
-            }
+                sb.showAll();
+            } 
             sb.setRevealChild(newState);
             sa.setState(new GVariant(newState));
             tbSideBar.setActive(newState);
@@ -286,6 +311,32 @@ private:
                 }
             });
         }
+
+        //Create directional Switch to Terminal actions
+        const string[] directions = ["up", "down", "left", "right"];
+        foreach (string direction; directions) {
+            registerActionWithSettings(sessionActions, ACTION_PREFIX, ACTION_SESSION_TERMINAL_X ~ direction, gsShortcuts, delegate(GVariant, SimpleAction sa) {
+                Session session = getCurrentSession();
+                if (session !is null) {
+                    string actionName = sa.getName();
+                    string direction = actionName[lastIndexOf(actionName, '-') + 1 .. $];
+                    session.focusDirection(direction);
+                }
+            });
+        }
+
+        //Create directional Resize to Terminal actions
+        foreach (string direction; directions) {
+            registerActionWithSettings(sessionActions, ACTION_PREFIX, ACTION_RESIZE_TERMINAL_DIRECTION ~ direction, gsShortcuts, delegate(GVariant, SimpleAction sa) {
+                Session session = getCurrentSession();
+                if (session !is null) {
+                    string actionName = sa.getName();
+                    string direction = actionName[lastIndexOf(actionName, '-') + 1 .. $];
+                    session.resizeTerminal(direction);
+                }
+            });
+        }
+
         /* TODO - GTK doesn't support settings Tab for accelerators, need to look into this more */
         registerActionWithSettings(sessionActions, ACTION_PREFIX, ACTION_SESSION_NEXT_TERMINAL, gsShortcuts, delegate(GVariant, SimpleAction) {
             Session session = getCurrentSession();
@@ -321,7 +372,7 @@ private:
             if (showInputDialog(this, name, name, _("Change Session Name"), _("Enter a new name for the session"))) {
                 if (name.length > 0) {
                     session.name = name;
-                    updateTitle(session);
+                    updateTitle();
                 }
             }
         });
@@ -354,6 +405,12 @@ private:
         mSessionSection.appendItem(new GMenuItem(_("Name…"), getActionDetailedName(ACTION_PREFIX, ACTION_SESSION_NAME)));
         mSessionSection.appendItem(new GMenuItem(_("Synchronize Input"), getActionDetailedName(ACTION_PREFIX, ACTION_SESSION_SYNC_INPUT)));
         model.appendSection(null, mSessionSection);
+
+        static if (SHOW_DEBUG_OPTIONS) {
+            GMenu mDebugSection = new GMenu();
+            mDebugSection.appendItem(new GMenuItem(_("GC"), getActionDetailedName("win", "gc")));
+            model.appendSection(null, mDebugSection);
+        }
 
         return new Popover(parent, model);
     }
@@ -443,28 +500,17 @@ private:
     }
 
     void updateUIState() {
-        if (sessionNotifications.length > 0) {
-            ulong count = 0;
-            foreach (sn; sessionNotifications.values) {
-                count = count + sn.messages.length;
-                trace(format("Entry %s has %d messages", sn.sessionUUID, sn.messages.length));
-            }
-            trace(format("Total Notifications %d for entries %d", count, sessionNotifications.length));
-            if (!tbSideBar.getStyleContext().hasClass(CSS_CLASS_NEEDS_ATTENTION)) {
-                tbSideBar.getStyleContext().addClass(CSS_CLASS_NEEDS_ATTENTION);
-            }
-        } else {
-            if (tbSideBar.getStyleContext().hasClass(CSS_CLASS_NEEDS_ATTENTION)) {
-                tbSideBar.getStyleContext().removeClass(CSS_CLASS_NEEDS_ATTENTION);
-            }
-        }
+        tbSideBar.queueDraw();
         saCloseSession.setEnabled(nb.getNPages > 1);
     }
 
-    void updateTitle(Session session) {
+    void updateTitle() {
         string title;
-        if (session) {
+        Session session = getCurrentSession();
+        if (session && nb.getNPages() == 1) {
             title = _(APPLICATION_NAME) ~ ": " ~ session.name;
+        } else if (session) { 
+            title = _(APPLICATION_NAME) ~ " " ~ to!string(nb.getCurrentPage()+1) ~ ": " ~ session.name;
         } else {
             title = _(APPLICATION_NAME);
         }
@@ -475,30 +521,50 @@ private:
     }
 
     bool drawSideBarBadge(Scoped!Context cr, Widget widget) {
-        if (nb.getNPages() > 1) {
+        
+        // pw, ph, ps = percent width, height, size
+        void drawBadge(double pw, double ph, double ps, RGBA fg, RGBA bg, int value) {
             int w = widget.getAllocatedWidth();
             int h = widget.getAllocatedHeight();
-            RGBA fg;
-            RGBA bg;
-            widget.getStyleContext().lookupColor("theme_fg_color", bg);
-            widget.getStyleContext().lookupColor("theme_bg_color", fg);
-            bg.alpha = 0.9;
 
-            double x = w * 0.70;
-            double y = h * 0.70;
-            double radius = w * 0.20;
-            cr.setSourceRgba(bg.red, bg.blue, bg.green, bg.alpha);
+            double x = w * pw;
+            double y = h * ph;
+            double radius = w * ps;
+            
+            cr.save();
+            cr.setSourceRgba(bg.red, bg.green, bg.blue, bg.alpha);
             cr.arc(x, y, radius, 0.0, 2.0 * PI);
             cr.fillPreserve();
             cr.stroke();
             cr.selectFontFace("monospace", cairo_font_slant_t.NORMAL, cairo_font_weight_t.NORMAL);
             cr.setFontSize(11);
-            cr.setSourceRgba(fg.red, fg.blue, fg.green, 1.0);
-            string text = to!string(nb.getNPages());
+            cr.setSourceRgba(fg.red, fg.green, fg.blue, 1.0);
+            string text = to!string(value);
             cairo_text_extents_t extents;
             cr.textExtents(text, &extents);
             cr.moveTo(x - extents.width / 2, y + extents.height / 2);
             cr.showText(text);
+            cr.restore();
+            cr.newPath();
+        }
+        
+        RGBA fg;
+        RGBA bg;
+        if (nb.getNPages() > 1) {
+            widget.getStyleContext().lookupColor("theme_fg_color", bg);
+            widget.getStyleContext().lookupColor("theme_bg_color", fg);
+            bg.alpha = 0.9;
+            drawBadge(0.72, 0.70, 0.19, fg, bg, nb.getNPages());
+        }
+        ulong count = 0;
+        foreach (sn; sessionNotifications.values) {
+            count = count + sn.messages.length;
+        }
+        if (count > 0) {
+            widget.getStyleContext().lookupColor("theme_selected_fg_color", fg);
+            widget.getStyleContext().lookupColor("theme_selected_bg_color", bg);
+            bg.alpha = 0.9;
+            drawBadge(0.28, 0.70, 0.19, fg, bg, to!int(count));
         }
         return false;
     }
@@ -559,17 +625,19 @@ private:
             scope (exit) {
                 dialog.destroy();
             }
-            if (dialog.run() == ResponseType.CANCEL)
+            if (dialog.run() != ResponseType.OK) {
+                trace("Abort close");
                 return true;
+            }
         }
         return false;
     }
 
-    void onWindowDestroyed(Widget widget) {
+    void onWindowDestroyed(Widget) {
         terminix.removeAppWindow(this);
     }
 
-    void onCompositedChanged(Widget widget) {
+    void onCompositedChanged(Widget) {
         trace("Composite changed");
         updateVisual();
     }
@@ -685,7 +753,8 @@ private:
      * Creates a new session based on parameters, user is not prompted
      */
     void createSession(string name, string profileUUID) {
-        createNewSession(name, profileUUID, Util.getHomeDir());
+        //createNewSession(name, profileUUID, Util.getHomeDir());
+        createNewSession(name, profileUUID, null);
     }
 
 public:
@@ -744,6 +813,11 @@ public:
             return getCurrentSession().focusTerminal(terminalUUID);
         }
         return false;
+    }
+    
+    string getActiveTerminalUUID() {
+        Session session = getCurrentSession();
+        return session.getActiveTerminalUUID();
     }
 
     /**

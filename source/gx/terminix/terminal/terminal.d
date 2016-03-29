@@ -30,6 +30,8 @@ import gdk.Screen;
 import gdkpixbuf.Pixbuf;
 
 import gio.ActionMapIF;
+import gio.File : GFile = File;
+import gio.FileIF : GFileIF = FileIF;
 import gio.Menu : GMenu = Menu;
 import gio.MenuItem : GMenuItem = MenuItem;
 import gio.Settings : GSettings = Settings;
@@ -67,11 +69,17 @@ import gtk.MountOperation;
 import gtk.Overlay;
 import gtk.Popover;
 import gtk.Revealer;
-import gtk.Scrollbar;
+
+static if (USE_SCROLLED_WINDOW) {
+    import gtk.ScrolledWindow;
+} else {
+    import gtk.Scrollbar;
+}
 import gtk.SelectionData;
 import gtk.Separator;
 import gtk.SeparatorMenuItem;
 import gtk.TargetEntry;
+import gtk.ToggleButton;
 import gtk.Widget;
 import gtk.Window;
 
@@ -149,11 +157,21 @@ alias OnTerminalRequestMove = void delegate(string srcUUID, Terminal dest, DragQ
  */
 alias OnTerminalRequestDetach = void delegate(Terminal terminal, int x, int y);
 
+enum SyncInputEventType {
+    KEY_PRESS,
+    PASTE
+};
+
+struct SyncInputEvent {
+    SyncInputEventType eventType;
+    Event event;
+}
+
 /**
  * Triggered on a terminal key press, used by the session to synchronize input
  * when this option is selected.
  */
-alias OnTerminalKeyPress = void delegate(Terminal terminal, Event event);
+alias OnTerminalSyncInput = void delegate(Terminal terminal, SyncInputEvent event);
 
 /**
  * Triggered when the terminal needs to change state. Delegate returns whether
@@ -196,7 +214,7 @@ private:
     OnTerminalRequestSplit[] terminalRequestSplitDelegates;
     OnTerminalRequestMove[] terminalRequestMoveDelegates;
     OnTerminalRequestDetach[] terminalRequestDetachDelegates;
-    OnTerminalKeyPress[] terminalKeyPressDelegates;
+    OnTerminalSyncInput[] terminalSyncInputDelegates;
     OnTerminalRequestStateChange[] terminalRequestStateChangeDelegates;
 
     TerminalState terminalState = TerminalState.NORMAL;
@@ -206,7 +224,9 @@ private:
 
     VTENotification vte;
     Overlay terminalOverlay;
-    Scrollbar sb;
+    static if (!USE_SCROLLED_WINDOW) {
+        Scrollbar sb;
+    }
 
     GPid gpid = 0;
     bool _terminalInitialized = false;
@@ -214,6 +234,7 @@ private:
     Box bTitle;
     MenuButton mbTitle;
     Label lblTitle;
+    ToggleButton tbSyncInput;
 
     string _profileUUID;
     //Sequential identifier, used to enable user to select terminal by number. Can change, not constant
@@ -226,10 +247,13 @@ private:
     string _overrideCommand;
     //Whether synchronized input is turned on in the session
     bool _synchronizeInput;
+    //If synchronized is on, determines if there is a local override turning it off for this terminal only
+    bool _synchronizeInputOverride = true;
+
     //Whether to ignore unsafe paste, basically when 
     //option is turned on but user opts to ignore it for this terminal
     bool unsafePasteIgnored;
-    
+
     string initialWorkingDir;
 
     SimpleActionGroup sagTerminalActions;
@@ -258,6 +282,9 @@ private:
     // to track which regex generated the match
     TerminalRegex[int] regexTag;
 
+    //Track match detection
+    TerminalURLMatch match;
+
     /**
      * Create the user interface of the TerminalPane
      */
@@ -276,15 +303,6 @@ private:
 
         //Enable Drag and Drop
         setupDragAndDrop(titlePane);
-
-        //Handle double click for window state change
-        addOnButtonPress(delegate(Event event, Widget) {
-            trace("Title button event received");
-            if (event.button.button == MouseButton.PRIMARY && event.getEventType() == EventType.DOUBLE_BUTTON_PRESS) {
-                maximize();
-            }
-            return false;
-        });
     }
 
     /**
@@ -296,7 +314,7 @@ private:
             widget.setMarginTop(1);
             widget.setMarginBottom(2);
         }
-
+        
         bTitle = new Box(Orientation.HORIZONTAL, 0);
         bTitle.setVexpand(false);
         bTitle.getStyleContext().addClass("notebook");
@@ -328,6 +346,7 @@ private:
 
         //Close Button
         Button btnClose = new Button("window-close-symbolic", IconSize.MENU);
+        btnClose.setTooltipText(_("Close"));
         btnClose.setRelief(ReliefStyle.NONE);
         btnClose.setFocusOnClick(false);
         btnClose.setActionName(getActionDetailedName(ACTION_PREFIX, ACTION_CLOSE));
@@ -336,13 +355,37 @@ private:
 
         //Maximize Button
         btnMaximize = new Button("window-maximize-symbolic", IconSize.MENU);
+        btnMaximize.setTooltipText(_("Maximize"));
         btnMaximize.setRelief(ReliefStyle.NONE);
         btnMaximize.setFocusOnClick(false);
         btnMaximize.setActionName(getActionDetailedName(ACTION_PREFIX, ACTION_MAXIMIZE));
         setVerticalMargins(btnMaximize);
         bTitle.packEnd(btnMaximize, false, false, 0);
 
-        return bTitle;
+        //Synchronize Input Button
+        tbSyncInput = new ToggleButton();
+        tbSyncInput.setNoShowAll(true);
+        tbSyncInput.setImage(new Image("input-keyboard-symbolic", IconSize.MENU));
+        tbSyncInput.setTooltipText(_("Disable input synchronization for this terminal"));
+        tbSyncInput.setRelief(ReliefStyle.NONE);
+        tbSyncInput.setFocusOnClick(false);
+        setVerticalMargins(tbSyncInput);
+        tbSyncInput.setActive(_synchronizeInputOverride);
+        tbSyncInput.addOnToggled(delegate(ToggleButton btn) { _synchronizeInputOverride = btn.getActive(); }, ConnectFlags.AFTER);
+        bTitle.packEnd(tbSyncInput, false, false, 0);
+
+        EventBox evtTitle = new EventBox();
+        evtTitle.add(bTitle);
+        //Handle double click for window state change
+        evtTitle.addOnButtonPress(delegate(Event event, Widget) {
+            if (event.getEventType() == EventType.DOUBLE_BUTTON_PRESS && event.button.button == MouseButton.PRIMARY) {
+                    maximize();
+            } else if (event.getEventType() == EventType.BUTTON_PRESS) {
+                    vte.grabFocus();
+            }
+            return false;
+        });
+        return evtTitle;
     }
 
     //Dynamically build the menus for selecting a profile
@@ -364,7 +407,6 @@ private:
     void buildEncodingMenu() {
         encodingMenu.removeAll();
         saEncodingSelect.setState(new GVariant(vte.getEncoding()));
-        GSettings gsSettings = new GSettings(SETTINGS_ID);
         string[] encodings = gsSettings.getStrv(SETTINGS_ENCODINGS_KEY);
         foreach (encoding; encodings) {
             if (encoding in lookupEncoding) {
@@ -398,8 +440,16 @@ private:
                 vte.grabFocus();
             }
         });
-        registerActionWithSettings(group, ACTION_PREFIX, ACTION_FIND_PREVIOUS, gsShortcuts, delegate(GVariant, SimpleAction) { vte.searchFindPrevious(); });
-        registerActionWithSettings(group, ACTION_PREFIX, ACTION_FIND_NEXT, gsShortcuts, delegate(GVariant, SimpleAction) { vte.searchFindNext(); });
+        registerActionWithSettings(group, ACTION_PREFIX, ACTION_FIND_PREVIOUS, gsShortcuts, delegate(GVariant, SimpleAction) { 
+            if (!vte.searchFindPrevious() && !vte.searchGetWrapAround) {
+                vte.searchFindNext();    
+            }
+        });
+        registerActionWithSettings(group, ACTION_PREFIX, ACTION_FIND_NEXT, gsShortcuts, delegate(GVariant, SimpleAction) {
+            if (!vte.searchFindNext() && !vte.searchGetWrapAround) {
+                vte.searchFindPrevious();    
+            }
+        });
 
         //Clipboard actions
         saCopy = registerActionWithSettings(group, ACTION_PREFIX, ACTION_COPY, gsShortcuts, delegate(GVariant, SimpleAction) {
@@ -413,6 +463,18 @@ private:
             }
         });
         registerActionWithSettings(group, ACTION_PREFIX, ACTION_SELECT_ALL, gsShortcuts, delegate(GVariant, SimpleAction) { vte.selectAll(); });
+
+        //Link Actions, no shortcuts, context menu only
+        registerAction(group, ACTION_PREFIX, ACTION_COPY_LINK, null, delegate(GVariant, SimpleAction) {
+            if (match.match) {
+                Clipboard.get(null).setText(match.match, to!int(match.match.length));
+            }
+        });
+        registerAction(group, ACTION_PREFIX, ACTION_OPEN_LINK, null, delegate(GVariant, SimpleAction) {
+            if (match.match) {
+                openURI(match.match, match.flavor);
+            }
+        });
 
         //Zoom actions
         registerActionWithSettings(group, ACTION_PREFIX, ACTION_ZOOM_IN, gsShortcuts, delegate(GVariant, SimpleAction) {
@@ -436,13 +498,16 @@ private:
         registerActionWithSettings(group, ACTION_PREFIX, ACTION_LAYOUT, gsShortcuts, delegate(GVariant, SimpleAction) {
             string terminalTitle = _overrideTitle.length == 0 ? gsProfile.getString(SETTINGS_PROFILE_TITLE_KEY) : _overrideTitle;
             LayoutDialog dialog = new LayoutDialog(cast(Window) getToplevel());
-            scope(exit) {dialog.destroy();}
+            scope (exit) {
+                dialog.destroy();
+            }
             dialog.title = terminalTitle;
             dialog.command = _overrideCommand;
             dialog.showAll();
             if (dialog.run() == ResponseType.OK) {
                 _overrideTitle = dialog.title;
                 _overrideCommand = dialog.command;
+                updateTitle();
             }
             /*            
             if (showInputDialog(null, terminalTitle, terminalTitle, _("Enter Custom Title"),
@@ -518,11 +583,38 @@ private:
     Popover createPopover(Widget parent) {
         GMenu model = new GMenu();
 
-        GMenuItem splitH = new GMenuItem(null, ACTION_PREFIX ~ "." ~ ACTION_SPLIT_H);
+        GMenuItem buttons = createSplitButtons();
+        model.appendItem(buttons);
+
+        GMenu menuSection = new GMenu();
+        menuSection.append(_("Save…"), ACTION_SAVE);
+        menuSection.append(_("Find…"), ACTION_FIND);
+        menuSection.append(_("Layout Options…"), ACTION_LAYOUT);
+        model.appendSection(null, menuSection);
+
+        menuSection = new GMenu();
+        menuSection.append(_("Read-Only"), ACTION_READ_ONLY);
+        model.appendSection(null, menuSection);
+
+        menuSection = new GMenu();
+        menuSection.appendSubmenu(_("Profiles"), profileMenu);
+        menuSection.appendSubmenu(_("Encoding"), encodingMenu);
+        model.appendSection(null, menuSection);
+
+        Popover pm = new Popover(parent);
+        pm.bindModel(model, ACTION_PREFIX);
+        return pm;
+    }
+
+    /**
+     * Creates the horizontal/vertical split buttons
+     */
+    GMenuItem createSplitButtons() {
+        GMenuItem splitH = new GMenuItem(null, ACTION_SPLIT_H);
         splitH.setAttributeValue("verb-icon", new GVariant("terminix-split-tab-right-symbolic"));
         splitH.setAttributeValue("label", new GVariant(_("Split Right")));
 
-        GMenuItem splitV = new GMenuItem(null, ACTION_PREFIX ~ "." ~ ACTION_SPLIT_V);
+        GMenuItem splitV = new GMenuItem(null, ACTION_SPLIT_V);
         splitV.setAttributeValue("verb-icon", new GVariant("terminix-split-tab-down-symbolic"));
         splitV.setAttributeValue("label", new GVariant(_("Split Down")));
 
@@ -532,27 +624,9 @@ private:
 
         GMenuItem splits = new GMenuItem(null, null);
         splits.setSection(splitSection);
-        //splits.setLabel("Split");
         splits.setAttributeValue("display-hint", new GVariant("horizontal-buttons"));
-        model.appendItem(splits);
 
-        GMenu menuSection = new GMenu();
-        menuSection.append(_("Save…"), getActionDetailedName(ACTION_PREFIX, ACTION_SAVE));
-        menuSection.append(_("Find…"), getActionDetailedName(ACTION_PREFIX, ACTION_FIND));
-        menuSection.append(_("Layout Options…"), getActionDetailedName(ACTION_PREFIX, ACTION_LAYOUT));
-        model.appendSection(null, menuSection);
-
-        menuSection = new GMenu();
-        menuSection.append(_("Read-Only"), getActionDetailedName(ACTION_PREFIX, ACTION_READ_ONLY));
-        model.appendSection(null, menuSection);
-
-        menuSection = new GMenu();
-        menuSection.appendSubmenu(_("Profiles"), profileMenu);
-        menuSection.appendSubmenu(_("Encoding"), encodingMenu);
-        model.appendSection(null, menuSection);
-
-        Popover pm = new Popover(parent, model);
-        return pm;
+        return splits;
     }
 
     /**
@@ -607,50 +681,43 @@ private:
 
         vte.addOnButtonPress(&onTerminalButtonPress);
         vte.addOnKeyPress(delegate(Event event, Widget widget) {
-            if (_synchronizeInput && event.key.sendEvent == 0) {
-                foreach (dlg; terminalKeyPressDelegates)
-                    dlg(this, event);
-            } else {
-                //trace("Synchronized Input = " ~ to!string(_synchronizeInput) ~ ", sendEvent=" ~ to!string(event.key.sendEvent));
+            if (isSynchronizedInput() && event.key.sendEvent == 0) {
+                SyncInputEvent se = SyncInputEvent(SyncInputEventType.KEY_PRESS, event);
+                foreach (dlg; terminalSyncInputDelegates)
+                    dlg(this, se);
             }
             return false;
         });
 
+        // Create basic context menu, items get added dynamically
         static if (POPOVER_CONTEXT_MENU) {
-            GMenu mmContext = new GMenu();
-            mmContext.append(_("Copy"), getActionDetailedName(ACTION_PREFIX, ACTION_COPY));
-            mmContext.append(_("Paste"), getActionDetailedName(ACTION_PREFIX, ACTION_PASTE));
-            mmContext.append(_("Select All"), getActionDetailedName(ACTION_PREFIX, ACTION_SELECT_ALL));
-            pmContext = new Popover(vte, mmContext);
+            pmContext = new Popover(vte);
             pmContext.setModal(true);
             pmContext.setPosition(PositionType.BOTTOM);
         } else {
-            //Can't get GIO Actions to work with GTKMenu, they are always disabled even though they
-            //work fine in a popover. Could switch this to a popover but popover positioning could use some
-            //work, as well popover clips in small windows.
             mContext = new Menu();
-            miCopy = new MenuItem(delegate(MenuItem) { vte.copyClipboard(); }, _("Copy"), null);
-            mContext.add(miCopy);
-            miPaste = new MenuItem(delegate(MenuItem) { pasteClipboard(); }, _("Paste"), null);
-            mContext.add(miPaste);
-            MenuItem miSelectAll = new MenuItem(delegate(MenuItem) { vte.selectAll(); }, _("Select All"), null);
-            mContext.add(new SeparatorMenuItem());
-            mContext.add(miSelectAll);
         }
         terminalOverlay = new Overlay();
-        terminalOverlay.add(vte);
+        static if (USE_SCROLLED_WINDOW) {
+            ScrolledWindow sw = new ScrolledWindow(vte);
+            terminalOverlay.add(sw);
+        } else {
+            terminalOverlay.add(vte);
+        }
 
         Box terminalBox = new Box(Orientation.HORIZONTAL, 0);
         terminalBox.add(terminalOverlay);
 
-        // See https://bugzilla.gnome.org/show_bug.cgi?id=760718 for we use
+        // See https://bugzilla.gnome.org/show_bug.cgi?id=760718 for why we use
         // a Scrollbar instead of a ScrolledWindow. It's pity considering the
         // overlay scrollbars look awesome with VTE
-        sb = new Scrollbar(Orientation.VERTICAL, vte.getVadjustment());
-        terminalBox.add(sb);
+        static if (!USE_SCROLLED_WINDOW) {
+            sb = new Scrollbar(Orientation.VERTICAL, vte.getVadjustment());
+            terminalBox.add(sb);
+        }
 
         Box box = new Box(Orientation.VERTICAL, 0);
-        rFind = new SearchRevealer(vte);
+        rFind = new SearchRevealer(vte, sagTerminalActions);
         rFind.addOnSearchEntryFocusIn(&onTerminalWidgetFocusIn);
         rFind.addOnSearchEntryFocusOut(&onTerminalWidgetFocusOut);
 
@@ -658,6 +725,10 @@ private:
         box.add(terminalBox);
 
         return box;
+    }
+
+    bool isSynchronizedInput() {
+        return _synchronizeInput && _synchronizeInputOverride;
     }
 
     /**
@@ -693,16 +764,20 @@ private:
         sa.setEnabled(terminalState == TerminalState.NORMAL);
         //Update button image
         string icon;
-        if (terminalState == TerminalState.MAXIMIZED)
+        if (terminalState == TerminalState.MAXIMIZED) {
             icon = "window-restore-symbolic";
-        else
+            btnMaximize.setTooltipText(_("Restore"));
+        } else {
             icon = "window-maximize-symbolic";
+            btnMaximize.setTooltipText(_("Maximize"));
+        }
         btnMaximize.setImage(new Image(icon, IconSize.BUTTON));
     }
 
-    void pasteClipboard() {
+    void pasteClipboard(bool inputSync = false) {
         string pasteText = Clipboard.get(null).waitForText();
-        if ((pasteText.indexOf("sudo") > -1) && (pasteText.indexOf("\n") != 0)) {
+        // Don't check for unsafe paste if doing sync input, original paste checked it
+        if (!inputSync && (pasteText.indexOf("sudo") > -1) && (pasteText.indexOf("\n") != 0)) {
             if (!unsafePasteIgnored && gsSettings.getBoolean(SETTINGS_UNSAFE_PASTE_ALERT_KEY)) {
                 UnsafePasteDialog dialog = new UnsafePasteDialog(cast(Window) getToplevel(), chomp(pasteText));
                 scope (exit) {
@@ -712,6 +787,15 @@ private:
                     return;
                 else
                     unsafePasteIgnored = true;
+            }
+        }
+        scope (exit) {
+            // Only call handler if synchronized input is active and we are
+            // not doing this paste as a result of a synchronized input
+            if (!inputSync && isSynchronizedInput()) {
+                SyncInputEvent se = SyncInputEvent(SyncInputEventType.PASTE, null);
+                foreach (dlg; terminalSyncInputDelegates)
+                    dlg(this, se);
             }
         }
         if (gsSettings.getBoolean(SETTINGS_STRIP_FIRST_COMMENT_CHAR_ON_PASTE_KEY)) {
@@ -777,29 +861,77 @@ private:
         }
     }
 
+    void buildContextMenu() {
+        static if (POPOVER_CONTEXT_MENU) {
+            GMenu mmContext = new GMenu();
+            if (match.match) {
+                GMenu linkSection = new GMenu();
+                linkSection.append(_("Open Link"), ACTION_OPEN_LINK);
+                linkSection.append(_("Copy Link Address"), ACTION_COPY_LINK);
+                mmContext.appendSection(null, linkSection);
+            }
+            GMenu clipSection = new GMenu();
+            clipSection.append(_("Copy"), ACTION_COPY);
+            clipSection.append(_("Paste"), ACTION_PASTE);
+            clipSection.append(_("Select All"), ACTION_SELECT_ALL);
+            mmContext.appendSection(null, clipSection);
+
+            GMenuItem buttons = createSplitButtons();
+            mmContext.appendItem(buttons);
+
+            pmContext.bindModel(mmContext, ACTION_PREFIX);
+        } else {
+            //Can't get GIO Actions to work with GTKMenu, they are always disabled even though they
+            //work fine in a popover. Could switch this to a popover but popover positioning could use some
+            //work, as well popover clips in small windows.
+            //
+            // Note doesn't have new copy/open link actions, will be removing context menu support in near
+            // future since popover seems to be working well
+            mContext.removeAll();
+            miCopy = new MenuItem(delegate(MenuItem) { vte.copyClipboard(); }, _("Copy"), null);
+            mContext.add(miCopy);
+            miPaste = new MenuItem(delegate(MenuItem) { pasteClipboard(); }, _("Paste"), null);
+            mContext.add(miPaste);
+            MenuItem miSelectAll = new MenuItem(delegate(MenuItem) { vte.selectAll(); }, _("Select All"), null);
+            mContext.add(new SeparatorMenuItem());
+            mContext.add(miSelectAll);
+        }
+    }
+
     /**
      * Signal received when mouse button is pressed in terminal
      */
     bool onTerminalButtonPress(Event event, Widget widget) {
+
+        void updateMatch(Event event) {
+            match.clear;
+            int tag;
+            match.match = vte.matchCheckEvent(event, tag);
+            if (match.match) {
+                if (tag in regexTag) {
+                    TerminalRegex regex = regexTag[tag];
+                    match.flavor = regex.flavor;
+                }
+            }
+        }
+
         if (event.type == EventType.BUTTON_PRESS) {
             GdkEventButton* buttonEvent = event.button;
+            updateMatch(event);
             switch (buttonEvent.button) {
             case MouseButton.PRIMARY:
-                int tag;
-                string match = vte.matchCheckEvent(event, tag);
-                if (match) {
-                    TerminalURLFlavor flavor = TerminalURLFlavor.AS_IS;
-                    if (tag in regexTag) {
-                        TerminalRegex regex = regexTag[tag];
-                        flavor = regex.flavor;
-                    }
-                    openURI(match, cast(TerminalURLFlavor) tag);
+                if (match.match) {
+                    openURI(match.match, match.flavor);
                     return true;
                 } else {
                     return false;
                 }
             case MouseButton.SECONDARY:
-                trace("Enablign actions");
+                trace("Enabling actions");
+                if (!(event.button.state & (GdkModifierType.SHIFT_MASK | GdkModifierType.CONTROL_MASK | GdkModifierType.MOD1_MASK)) && vte.onButtonPressEvent(event.button))
+                    return true;
+
+                buildContextMenu();
                 static if (POPOVER_CONTEXT_MENU) {
                     saCopy.setEnabled(vte.getHasSelection());
                     saPaste.setEnabled(Clipboard.get(null).waitIsTextAvailable());
@@ -878,16 +1010,16 @@ private:
 
     // Preferences go here
 private:
-    RGBA fg;
-    RGBA bg;
-    RGBA[16] palette;
+    RGBA vteFG;
+    RGBA vteBG;
+    RGBA[16] vtePalette;
 
     void initColors() {
-        fg = new RGBA();
-        bg = new RGBA();
-        palette = new RGBA[16];
+        vteFG = new RGBA();
+        vteBG = new RGBA();
+        vtePalette = new RGBA[16];
         for (int i = 0; i < 16; i++) {
-            palette[i] = new RGBA();
+            vtePalette[i] = new RGBA();
         }
     }
 
@@ -913,25 +1045,27 @@ private:
         case SETTINGS_PROFILE_FG_COLOR_KEY, SETTINGS_PROFILE_BG_COLOR_KEY, SETTINGS_PROFILE_PALETTE_COLOR_KEY, SETTINGS_PROFILE_USE_THEME_COLORS_KEY,
         SETTINGS_PROFILE_BG_TRANSPARENCY_KEY:
                 if (gsProfile.getBoolean(SETTINGS_PROFILE_USE_THEME_COLORS_KEY)) {
-                    vte.getStyleContext().getColor(StateFlags.ACTIVE, fg);
-                    vte.getStyleContext().getBackgroundColor(StateFlags.ACTIVE, bg);
+                    getStyleColor(vte.getStyleContext(), StateFlags.ACTIVE, vteFG);
+                    getStyleBackgroundColor(vte.getStyleContext(), StateFlags.ACTIVE, vteBG);
                 } else {
-                    if (!fg.parse(gsProfile.getString(SETTINGS_PROFILE_FG_COLOR_KEY)))
-                        trace("Parsing foreground color failed");
-                    if (!bg.parse(gsProfile.getString(SETTINGS_PROFILE_BG_COLOR_KEY)))
-                        trace("Parsing background color failed");
-                }
-            bg.alpha = to!double(100 - gsProfile.getInt(SETTINGS_PROFILE_BG_TRANSPARENCY_KEY)) / 100.0;
+                if (!vteFG.parse(gsProfile.getString(SETTINGS_PROFILE_FG_COLOR_KEY)))
+                    trace("Parsing foreground color failed");
+                if (!vteBG.parse(gsProfile.getString(SETTINGS_PROFILE_BG_COLOR_KEY)))
+                    trace("Parsing background color failed");
+            }
+            vteBG.alpha = to!double(100 - gsProfile.getInt(SETTINGS_PROFILE_BG_TRANSPARENCY_KEY)) / 100.0;
             string[] colors = gsProfile.getStrv(SETTINGS_PROFILE_PALETTE_COLOR_KEY);
             foreach (i, color; colors) {
-                if (!palette[i].parse(color))
+                if (!vtePalette[i].parse(color))
                     trace("Parsing color failed " ~ colors[i]);
             }
-            vte.setColors(fg, bg, palette);
+            vte.setColors(vteFG, vteBG, vtePalette);
             break;
         case SETTINGS_PROFILE_SHOW_SCROLLBAR_KEY:
-            sb.setNoShowAll(!gsProfile.getBoolean(SETTINGS_PROFILE_SHOW_SCROLLBAR_KEY));
-            sb.setVisible(gsProfile.getBoolean(SETTINGS_PROFILE_SHOW_SCROLLBAR_KEY));
+            static if (!USE_SCROLLED_WINDOW) {
+                sb.setNoShowAll(!gsProfile.getBoolean(SETTINGS_PROFILE_SHOW_SCROLLBAR_KEY));
+                sb.setVisible(gsProfile.getBoolean(SETTINGS_PROFILE_SHOW_SCROLLBAR_KEY));
+            }
             break;
         case SETTINGS_PROFILE_SCROLL_ON_OUTPUT_KEY:
             vte.setScrollOnOutput(gsProfile.getBoolean(SETTINGS_PROFILE_SCROLL_ON_OUTPUT_KEY));
@@ -940,8 +1074,7 @@ private:
             vte.setScrollOnKeystroke(gsProfile.getBoolean(SETTINGS_PROFILE_SCROLL_ON_INPUT_KEY));
             break;
         case SETTINGS_PROFILE_UNLIMITED_SCROLL_KEY, SETTINGS_PROFILE_SCROLLBACK_LINES_KEY:
-            long scrollLines = gsProfile.getBoolean(
-                    SETTINGS_PROFILE_UNLIMITED_SCROLL_KEY) ? -1 : gsProfile.getInt(SETTINGS_PROFILE_SCROLLBACK_LINES_KEY);
+            long scrollLines = gsProfile.getBoolean(SETTINGS_PROFILE_UNLIMITED_SCROLL_KEY) ? -1 : gsProfile.getInt(SETTINGS_PROFILE_SCROLLBACK_LINES_KEY);
             vte.setScrollbackLines(scrollLines);
             break;
         case SETTINGS_PROFILE_BACKSPACE_BINDING_KEY:
@@ -1034,6 +1167,19 @@ private:
 
 private:
 
+    void showInfoBarMessage(string message) {
+        TerminalInfoBar ibRelaunch = new TerminalInfoBar();
+        ibRelaunch.addOnResponse(delegate(int response, InfoBar ib) {
+            if (response == ResponseType.OK) {
+                ibRelaunch.destroy();
+                spawnTerminalProcess(initialWorkingDir);
+            }
+        });
+        ibRelaunch.setMessage(message);
+        terminalOverlay.addOverlay(ibRelaunch);
+        ibRelaunch.showAll();
+    }
+
     /**
      * Spawns the child process in the Terminal depending on the Profile
      * command options.
@@ -1073,17 +1219,21 @@ private:
         foreach (arg; args)
             trace("Argument: " ~ arg);
         try {
+            //Set PWD so that shell sets correct directory for symlinks, see #164
+            if (workingDir.length > 0) {
+                envv ~= ["PWD=" ~ workingDir];
+            }
             bool result = vte.spawnSync(VtePtyFlags.DEFAULT, workingDir, args, envv, flags, null, null, gpid, null);
             if (!result) {
                 string msg = _("Unexpected error occurred, no additional information available");
                 error(msg);
-                vte.feedChild(msg, msg.length);
+                showInfoBarMessage(msg);
             }
         }
         catch (GException ge) {
             string msg = format(_("Unexpected error occurred: %s"), ge.msg);
             error(msg);
-            vte.feedChild(msg, msg.length);
+            showInfoBarMessage(msg);
         }
         vte.grabFocus();
     }
@@ -1096,6 +1246,11 @@ private:
 private:
 
     DragInfo dragInfo = DragInfo(false, DragQuadrant.LEFT);
+    static if (USE_PIXBUF_DND) {
+        Pixbuf dragImage;
+    } else {
+        Window dragImage;
+    }
 
     /**
      * Sets up the DND by registering the TargetEntry objects as source and destinations
@@ -1119,6 +1274,7 @@ private:
         addOnDragBegin(&onTitleDragBegin);
         addOnDragDataGet(&onTitleDragDataGet);
         addOnDragFailed(&onTitleDragFailed, ConnectFlags.AFTER);
+        addOnDragEnd(&onTitleDragEnd, ConnectFlags.AFTER);
 
         //VTE Drop events
         vte.addOnDragDataReceived(&onVTEDragDataReceived);
@@ -1150,8 +1306,22 @@ private:
      */
     void onTitleDragBegin(DragContext dc, Widget widget) {
         trace("Title Drag begin");
-        Pixbuf pb = getWidgetImage(this, 0.20);
-        DragAndDrop.dragSetIconPixbuf(dc, pb, 0, 0);
+        static if (USE_PIXBUF_DND) {
+            dragImage = getWidgetImage(this, 0.20);
+            DragAndDrop.dragSetIconPixbuf(dc, dragImage, 0, 0);
+        } else {
+            Image image = new Image(getWidgetImage(this, 0.20));
+            image.show();
+            dragImage = new Window(GtkWindowType.POPUP);
+            dragImage.add(image);
+            DragAndDrop.dragSetIconWidget(dc, dragImage, 0, 0);
+        }
+    }
+
+    void onTitleDragEnd(DragContext dc, Widget widget) {
+        trace("Title drag end");
+        dragImage.destroy();
+        dragImage = null;
     }
 
     /**
@@ -1285,8 +1455,17 @@ private:
             string[] uris = data.getUris();
             if (uris) {
                 foreach (uri; uris) {
-                    string hostname;
-                    string quoted = ShellUtils.shellQuote(URI.filenameFromUri(uri, hostname)) ~ " ";
+                    trace("Dropped filename " ~ uri);
+                    GFileIF file = GFile.parseName(uri);
+                    string filename;
+                    if (file !is null) {
+                        filename = file.getPath();
+                        trace("Converted filename " ~ filename);
+                    } else {
+                        string hostname;
+                        filename = URI.filenameFromUri(uri, hostname);
+                    }
+                    string quoted = ShellUtils.shellQuote(filename) ~ " ";
                     vte.feedChild(quoted, quoted.length);
                 }
             }
@@ -1312,14 +1491,11 @@ private:
 
     //Draw the drag hint if dragging is occurring
     bool onVTEDraw(Scoped!Context cr, Widget widget) {
+
         static if (DIM_TERMINAL_NO_FOCUS && POPOVER_CONTEXT_MENU) {
-            if (!vte.isFocus() && 
-                !rFind.isSearchEntryFocus() &&
-                !pmContext.isVisible() &&
-                !mbTitle.getPopover().isVisible()
-                ) {
+            if (!vte.isFocus() && !rFind.isSearchEntryFocus() && !pmContext.isVisible() && !mbTitle.getPopover().isVisible()) {
                 RGBA bg;
-                vte.getStyleContext().getBackgroundColor(StateFlags.SELECTED, bg);
+                getStyleBackgroundColor(vte.getStyleContext(), StateFlags.SELECTED, bg);
                 cr.setSourceRgba(bg.red, bg.green, bg.blue, 0.1);
                 cr.rectangle(0, 0, widget.getAllocatedWidth(), widget.getAllocatedHeight());
                 cr.fill();
@@ -1328,9 +1504,14 @@ private:
         //Dragging happening?
         if (!dragInfo.isDragActive)
             return false;
-        RGBA bg;
-        vte.getStyleContext().getBackgroundColor(StateFlags.SELECTED, bg);
-        cr.setSourceRgba(bg.red, bg.green, bg.blue, 0.1);
+        RGBA color;
+        getStyleColor(vte.getStyleContext(), StateFlags.ACTIVE, color);
+        /*
+        if (!vte.getStyleContext().lookupColor("theme_selected_bg_color", bg)) {
+            getStyleBackgroundColor(vte.getStyleContext(), StateFlags.SELECTED, bg);
+        }
+        */
+        cr.setSourceRgba(color.red, color.green, color.blue, 0.3);
         cr.setLineWidth(1);
         int w = widget.getAllocatedWidth();
         int h = widget.getAllocatedHeight();
@@ -1446,7 +1627,7 @@ public:
      *  firstRun    = Whether this is the first run of the application, used to determine whether to apply profile geometry
      */
     void initTerminal(string initialPath, bool firstRun) {
-        trace("Initializing Terminal");
+        trace("Initializing Terminal with directory " ~ initialPath);
         initialWorkingDir = initialPath;
         spawnTerminalProcess(initialPath, overrideCommand);
         if (firstRun) {
@@ -1502,6 +1683,7 @@ public:
      * Determines if a child process is running in the terminal
      */
     bool isProcessRunning() {
+        if (vte.getPty() is null) return false;
         int fd = vte.getPty().getFd();
         pid_t fg = tcgetpgrp(fd);
         trace(format("fg=%d gpid=%d", fg, gpid));
@@ -1511,9 +1693,21 @@ public:
     /**
      * Called by the session to synchronize input
      */
-    void echoKeyPressEvent(Event event) {
-        event.key.window = vte.getWindow().getWindowStruct();
-        vte.event(event);
+    void handleSyncInput(SyncInputEvent sie) {
+        if (!isSynchronizedInput())
+            return;
+
+        final switch (sie.eventType) {
+        case SyncInputEventType.KEY_PRESS:
+            Event newEvent = sie.event.copy();
+            newEvent.key.sendEvent = 1;
+            newEvent.key.window = vte.getWindow().getWindowStruct();
+            vte.event(newEvent);
+            break;
+        case SyncInputEventType.PASTE:
+            pasteClipboard(true);
+            break;
+        }
     }
 
     @property string currentDirectory() {
@@ -1545,7 +1739,13 @@ public:
     }
 
     @property void synchronizeInput(bool value) {
-        _synchronizeInput = value;
+        if (_synchronizeInput != value) {
+            _synchronizeInput = value;
+            if (_synchronizeInput)
+                tbSyncInput.show();
+            else
+                tbSyncInput.hide();
+        }
     }
 
     /**
@@ -1571,11 +1771,11 @@ public:
             _terminalInitialized = value;
         }
     }
-    
+
     @property string overrideCommand() {
-        return _overrideCommand;        
+        return _overrideCommand;
     }
-    
+
     @property void overrideCommand(string value) {
         _overrideCommand = value;
     }
@@ -1636,12 +1836,12 @@ public:
         gx.util.array.remove(terminalInFocusDelegates, dlg);
     }
 
-    void addOnTerminalKeyPress(OnTerminalKeyPress dlg) {
-        terminalKeyPressDelegates ~= dlg;
+    void addOnTerminalSyncInput(OnTerminalSyncInput dlg) {
+        terminalSyncInputDelegates ~= dlg;
     }
 
-    void removeOnTerminalKeyPress(OnTerminalKeyPress dlg) {
-        gx.util.array.remove(terminalKeyPressDelegates, dlg);
+    void removeOnTerminalSyncInput(OnTerminalSyncInput dlg) {
+        gx.util.array.remove(terminalSyncInputDelegates, dlg);
     }
 
     void addOnTerminalRequestStateChange(OnTerminalRequestStateChange dlg) {
@@ -1676,6 +1876,10 @@ public:
         getContentArea().packStart(lblPrompt, true, true, 0);
         setHalign(Align.FILL);
         setValign(Align.START);
+    }
+    
+    void setMessage(string message) {
+        lblPrompt.setText(message);
     }
 
     void setStatus(int value) {
@@ -1720,13 +1924,13 @@ public:
 //Block for defining various DND structs and constants
 private:
 /**
-     * Constant used to identify terminal drag and drop
-     */
+ * Constant used to identify terminal drag and drop
+ */
 enum VTE_DND = "vte";
 
 /**
-    * List of available Drop Targets for VTE
-    */
+ * List of available Drop Targets for VTE
+ */
 enum DropTargets {
     URILIST,
     STRING,
@@ -1744,6 +1948,20 @@ struct DragInfo {
 
 //Block for handling default regex in vte
 private:
+
+/**
+ * Struct used to track matches in terminal for cases like context menu
+ * where we need to preserve state between finding match and performing action
+ */
+struct TerminalURLMatch {
+    TerminalURLFlavor flavor;
+    string match;
+
+    void clear() {
+        flavor = TerminalURLFlavor.AS_IS;
+        match.length = 0;
+    }
+}
 
 //REGEX, cribbed from Gnome Terminal
 enum USERCHARS = "-[:alnum:]";
@@ -1784,10 +2002,19 @@ immutable Regex[URL_REGEX_PATTERNS.length] compiledRegex;
 
 static this() {
     import std.exception : assumeUnique;
+    import vte.Version : Version;
+
+    uint majorVersion = Version.getMajorVersion();
+    uint minorVersion = Version.getMinorVersion();
+    trace(format("VTE Version is %d.%d", majorVersion, minorVersion));
 
     Regex[URL_REGEX_PATTERNS.length] tempRegex;
     foreach (i, regex; URL_REGEX_PATTERNS) {
-        tempRegex[i] = new Regex(regex.pattern, GRegexCompileFlags.OPTIMIZE | regex.caseless ? GRegexCompileFlags.CASELESS : cast(GRegexCompileFlags) 0, cast(GRegexMatchFlags) 0);
+        GRegexCompileFlags flags = GRegexCompileFlags.OPTIMIZE | regex.caseless ? GRegexCompileFlags.CASELESS : cast(GRegexCompileFlags) 0;
+        if (minorVersion >= 44) {
+            flags = flags | GRegexCompileFlags.MULTILINE;
+        }
+        tempRegex[i] = new Regex(regex.pattern, flags, cast(GRegexMatchFlags) 0);
     }
     compiledRegex = assumeUnique(tempRegex);
 }

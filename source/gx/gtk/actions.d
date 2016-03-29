@@ -12,12 +12,29 @@ import gio.ActionMapIF;
 import gio.SimpleAction;
 import gio.Settings : GSettings = Settings;
 
+import gtk.AccelGroup;
 import gtk.Application;
 import gtk.ApplicationWindow;
 
+import gx.i18n.l10n;
+
 private Application app = null;
 
-enum SHORTCUT_DISABLED = "disabled";
+enum SHORTCUT_DISABLED = N_("disabled");
+
+/**
+ * Convert an accelerator name to a label
+ */
+string acceleratorNameToLabel(string acceleratorName) {
+    uint acceleratorKey; 
+    GdkModifierType acceleratorMods;
+    AccelGroup.acceleratorParse(acceleratorName, acceleratorKey, acceleratorMods);
+    string label = AccelGroup.acceleratorGetLabel(acceleratorKey, acceleratorMods);
+    if (label == "") {
+      label = _(SHORTCUT_DISABLED);
+    }
+    return label;
+}
 
 /**
  * Given an action prefix and id returns the detailed name

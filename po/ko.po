@@ -1,192 +1,189 @@
-# Terminix zh_CN translation
-# Jeff Bai <jeffbai@aosc.xyz>, 2016.
+# Youngbin Han <sukso96100@gmail.com>, 2016.
 msgid ""
 msgstr ""
-"Project-Id-Version: Terminix 20160222\n"
+"Project-Id-Version: Terminix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-27 19:25-0400\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Jeff Bai <jeffbai@aosc.xyz>\n"
-"Language-Team: AOSC zh_CN <aosc@member.fsf.org>\n"
-"Language: zh_CN\n"
+"Last-Translator: Youngbin Han <sukso96100@gmail.com>\n"
+"Language-Team: sukso96100@gmail.com\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "terminal"
-msgstr "终端"
+msgstr "터미널"
 
 msgid "title"
-msgstr "标题"
+msgstr "제목"
 
 # *****************************************
 # Keyboard shortcut categories
 # *****************************************
 msgid "app"
-msgstr "应用程序"
+msgstr "애플리케이션"
 
 msgid "new-window"
-msgstr "新建窗口"
+msgstr "새 창"
 
 msgid "new-session"
-msgstr "新建会话"
+msgstr "새 세션"
 
 msgid "preferences"
-msgstr "首选项"
+msgstr "기본 설정"
 
 #, fuzzy
 msgid "shortcuts"
-msgstr "快捷键"
+msgstr "바로 가기"
 
 msgid "session"
-msgstr "会话"
+msgstr "세션"
 
 msgid "synchronize-input"
-msgstr "同步输入"
+msgstr "입력 동기화"
 
 msgid "close"
-msgstr "关闭"
+msgstr "닫기"
 
 msgid "name"
-msgstr "名称"
+msgstr "이름"
 
 msgid "load"
-msgstr "载入"
+msgstr "불러오기"
 
 msgid "save"
-msgstr "保存"
+msgstr "저장"
 
 msgid "save-as"
-msgstr "另存为"
+msgstr "다른 이름으로 저장"
 
 msgid "switch-to-terminal-0"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 msgid "switch-to-terminal-1"
-msgstr "切换到终端 1"
+msgstr "터미널 1번으로 전환"
 
 msgid "switch-to-terminal-2"
-msgstr "切换到终端 2"
+msgstr "터미널 2번으로 전환"
 
 msgid "switch-to-terminal-3"
-msgstr "切换到终端 3"
+msgstr "터미널 3번으로 전환"
 
 msgid "switch-to-terminal-4"
-msgstr "切换到终端 4"
+msgstr "터미널 4번으로 전환"
 
 msgid "switch-to-terminal-5"
-msgstr "切换到终端 5"
+msgstr "터미널 5번으로 전환"
 
 msgid "switch-to-terminal-6"
-msgstr "切换到终端 6"
+msgstr "터미널 6번으로 전환"
 
 msgid "switch-to-terminal-7"
-msgstr "切换到终端 7"
+msgstr "터미널 7번으로 전환"
 
 msgid "switch-to-terminal-8"
-msgstr "切换到终端 8"
+msgstr "터미널 8번으로 전환"
 
 msgid "switch-to-terminal-9"
-msgstr "切换到终端 9"
+msgstr "터미널 9번으로 전환"
 
 #, fuzzy
 msgid "switch-to-terminal-up"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #, fuzzy
 msgid "switch-to-terminal-down"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #, fuzzy
 msgid "switch-to-terminal-left"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #, fuzzy
 msgid "switch-to-terminal-right"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #, fuzzy
 msgid "resize-terminal-up"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #, fuzzy
 msgid "resize-terminal-down"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #, fuzzy
 msgid "resize-terminal-left"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #, fuzzy
 msgid "resize-terminal-right"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 msgid "win"
-msgstr "win"
+msgstr "창"
 
 msgid "view-sidebar"
-msgstr "显示侧边栏"
+msgstr "사이드바 보기"
 
 msgid "switch-to-session-0"
-msgstr "切换到会话 10"
+msgstr "세션 10번으로 전환"
 
 msgid "switch-to-session-1"
-msgstr "切换到会话 1"
+msgstr "세션 1번으로 전환"
 
 msgid "switch-to-session-2"
-msgstr "切换到会话 2"
+msgstr "세션 2번으로 전환"
 
 msgid "switch-to-session-3"
-msgstr "切换到会话 3"
+msgstr "세션 3번으로 전환"
 
 msgid "switch-to-session-4"
-msgstr "切换到会话 4"
+msgstr "세션 4번으로 전환"
 
 msgid "switch-to-session-5"
-msgstr "切换到会话 5"
+msgstr "세션 5번으로 전환"
 
 msgid "switch-to-session-6"
-msgstr "切换到会话 6"
+msgstr "세션 6번으로 전환"
 
 msgid "switch-to-session-7"
-msgstr "切换到会话 7"
+msgstr "세션 7번으로 전환"
 
 msgid "switch-to-session-8"
-msgstr "切换到会话 8"
+msgstr "세션 8번으로 전환"
 
 msgid "switch-to-session-9"
-msgstr "切换到会话 9"
+msgstr "세션 9번으로 전환"
 
-#, fuzzy
 msgid "switch-to-next-session"
-msgstr "切换到会话 10"
+msgstr "다음 세션으로 전환"
 
-#, fuzzy
 msgid "switch-to-previous-session"
-msgstr "切换到上一个终端"
+msgstr "이전 세션으로 전환"
 
 msgid "fullscreen"
-msgstr "全屏"
+msgstr "전체화면"
 
 msgid "switch-to-next-terminal"
-msgstr "切换到下一个终端"
+msgstr "다음 터미널로 전환"
 
 msgid "switch-to-previous-terminal"
-msgstr "切换到上一个终端"
+msgstr "이전 터미널로 전환"
 
 msgid "split-horizontal"
-msgstr "水平分割"
+msgstr "수평으로 분할"
 
 msgid "split-vertical"
-msgstr "垂直分割"
+msgstr "수직으로 분할"
 
 msgid "find"
-msgstr "查找"
+msgstr "찾기"
 
 msgid "find-next"
-msgstr "查找下一个"
+msgstr "다음 찾기"
 
 # ***********************************************
 # Keyboard shortcuts to the end, these are shown
@@ -194,269 +191,270 @@ msgstr "查找下一个"
 # the shortcut overview if available in Gnome 3.20
 # ***********************************************
 msgid "find-previous"
-msgstr "查找上一个"
+msgstr "이전 찾기"
 
 msgid "layout"
-msgstr "布局"
+msgstr "레이아웃"
 
 msgid "maximize"
-msgstr "最大化"
+msgstr "최대화"
 
 msgid "profile-preference"
-msgstr "配置方案首选项"
+msgstr "프로파일 설정"
 
 msgid "read-only"
-msgstr "只读"
+msgstr "읽기전용"
 
 msgid "copy"
-msgstr "复制"
+msgstr "복사"
 
 msgid "paste"
-msgstr "粘贴"
+msgstr "붙여넣기"
 
 msgid "select-all"
-msgstr "全选"
+msgstr "모두 선택"
 
 msgid "zoom-in"
-msgstr "放大"
+msgstr "확대"
 
 msgid "zoom-out"
-msgstr "缩小"
+msgstr "축소"
 
 msgid "zoom-normal"
-msgstr "正常缩放"
+msgstr "확대 원래대로"
 
 #: source/gx/terminix/colorschemes.d:107
 #, c-format
 msgid "File %s is not a color scheme compliant JSON file"
-msgstr "文件 %s 不是兼容的 JSON 颜色主题文件"
+msgstr "파일 %s은(는) 색상 스키마 호환 JSON 파일이 아닙니다"
 
 #: source/gx/terminix/colorschemes.d:140
 msgid "Color scheme palette requires 16 colors"
-msgstr "颜色主题色板需要 16 个颜色"
+msgstr "색상표에 16 가지 색상이 필요합니다"
 
 #: source/gx/terminix/profilewindow.d:64
 #, c-format
 msgid "Editing Profile: %s"
-msgstr "正在编辑配置方案：%s"
+msgstr "편집중인 프로파일: %s"
 
 #: source/gx/terminix/profilewindow.d:66
 msgid "New Profile"
-msgstr "新建配置方案"
+msgstr "새 프로파일"
 
 #: source/gx/terminix/profilewindow.d:74
 msgid "General"
-msgstr "常规"
+msgstr "일반"
 
 #: source/gx/terminix/profilewindow.d:75 source/gx/terminix/profilewindow.d:630
 #: source/gx/terminix/terminal/layout.d:64
 msgid "Command"
-msgstr "命令"
+msgstr "명령어"
 
 #: source/gx/terminix/profilewindow.d:76
 msgid "Color"
-msgstr "颜色"
+msgstr "색상"
 
 #: source/gx/terminix/profilewindow.d:77
 msgid "Scrolling"
-msgstr "滚动"
+msgstr "스크롤링"
 
 #: source/gx/terminix/profilewindow.d:78
 msgid "Compatibility"
-msgstr "兼容性"
+msgstr "호환성"
 
 #: source/gx/terminix/profilewindow.d:127
 msgid "Profile Name"
-msgstr "配置方案名称"
+msgstr "프로파일 이름"
 
 #: source/gx/terminix/profilewindow.d:135
 #, c-format
 msgid "ID: %s"
-msgstr "ID：%s"
+msgstr "ID: %s"
 
 #: source/gx/terminix/profilewindow.d:142
 msgid "Terminal Size"
-msgstr "终端大小"
+msgstr "터미널 크기"
 
 #: source/gx/terminix/profilewindow.d:152
 msgid "columns"
-msgstr "列"
+msgstr "행"
 
 #: source/gx/terminix/profilewindow.d:158
 msgid "rows"
-msgstr "行"
+msgstr "열"
 
 #: source/gx/terminix/profilewindow.d:163
 msgid "Reset"
-msgstr "重置"
+msgstr "초기화"
 
 #: source/gx/terminix/profilewindow.d:169
 msgid "Cursor"
-msgstr "光标"
+msgstr "커서"
 
 #: source/gx/terminix/profilewindow.d:172
 msgid "Block"
-msgstr "方块"
+msgstr "블록"
 
 #: source/gx/terminix/profilewindow.d:172
 msgid "IBeam"
-msgstr "IBeam"
+msgstr "I빔"
 
 #: source/gx/terminix/profilewindow.d:172
 msgid "Underline"
-msgstr "下划线"
+msgstr "밑줄"
 
 #: source/gx/terminix/profilewindow.d:179
 msgid "Blink Mode"
-msgstr "闪烁模式"
+msgstr "깜빡임 모드"
 
 #: source/gx/terminix/profilewindow.d:182
 msgid "System"
-msgstr "系统"
+msgstr "시스템"
 
 #: source/gx/terminix/profilewindow.d:182
 msgid "On"
-msgstr "开启"
+msgstr "켬"
 
 #: source/gx/terminix/profilewindow.d:182
 msgid "Off"
-msgstr "关闭"
+msgstr "끔"
 
 #: source/gx/terminix/profilewindow.d:188
 msgid "Terminal Bell"
-msgstr "终端响铃"
+msgstr "터미널 벨"
 
 #: source/gx/terminix/profilewindow.d:198
 msgid "Terminal Title"
-msgstr "终端标题"
+msgstr "터미널 제목"
 
 #: source/gx/terminix/profilewindow.d:211
 msgid "Text Appearance"
-msgstr "文本外观"
+msgstr "텍스트 모양새"
 
 #: source/gx/terminix/profilewindow.d:217
 msgid "Allow bold text"
-msgstr "允许粗体"
+msgstr "굵은 글씨 허용"
 
 #: source/gx/terminix/profilewindow.d:222
 msgid "Rewrap on resize"
-msgstr "缩放时重新换行"
+msgstr "크기 조절시 자동으로 줄바꿈 하기"
 
 #: source/gx/terminix/profilewindow.d:228
 msgid "Custom Font"
-msgstr "自定义字体"
+msgstr "서용자 정의 글꼴"
 
 #: source/gx/terminix/profilewindow.d:234
 msgid "Choose A Terminal Font"
-msgstr "选择终端字体"
+msgstr "터미널 글꼴 선택"
 
 #: source/gx/terminix/profilewindow.d:286
 msgid "Color scheme"
-msgstr "配色方案"
+msgstr "색상 스키마"
 
 #: source/gx/terminix/profilewindow.d:296
 msgid "Custom"
-msgstr "自定义"
+msgstr "사용자 정의"
 
 #: source/gx/terminix/profilewindow.d:307
 msgid "Color palette"
-msgstr "调色板"
+msgstr "색상 팔레트"
 
 #: source/gx/terminix/profilewindow.d:315
 msgid "Options"
-msgstr "选项"
+msgstr "옵션"
 
 #: source/gx/terminix/profilewindow.d:323
 msgid "Use theme colors for foreground/background"
-msgstr "为前景/背景色使用主题颜色"
+msgstr "전경/배경 에 대해 테마 색상 사용"
 
 #: source/gx/terminix/profilewindow.d:333
 msgid "Transparency"
-msgstr "透明度"
+msgstr "투명도"
 
 #: source/gx/terminix/profilewindow.d:357
 msgid "Select Background Color"
-msgstr "选择背景色"
+msgstr "배경 색상 선택"
 
 #: source/gx/terminix/profilewindow.d:365
 msgid "Background"
-msgstr "背景"
+msgstr "배경"
 
 #: source/gx/terminix/profilewindow.d:370
 #: source/gx/terminix/profilewindow.d:384
 msgid "Select Foreground Color"
-msgstr "选择前景色"
+msgstr "전경 색상 선택"
 
 #: source/gx/terminix/profilewindow.d:383
 msgid "Foreground"
-msgstr "前景"
+msgstr "전경"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Black"
-msgstr "黑色"
+msgstr "검정"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Red"
-msgstr "红色"
+msgstr "빨강"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Green"
-msgstr "绿色"
+msgstr "녹색"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Orange"
-msgstr "橙色"
+msgstr "주황"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Blue"
-msgstr "蓝色"
+msgstr "파랑"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Purple"
-msgstr "紫色"
+msgstr "보라"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Turquoise"
-msgstr "绿松色"
+msgstr "청록"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Grey"
-msgstr "灰"
+msgstr "회색"
 
 #: source/gx/terminix/profilewindow.d:394
 #, c-format
 msgid "Select %s Color"
-msgstr "选择 %s 个颜色"
+msgstr "%s색 선택"
 
 #: source/gx/terminix/profilewindow.d:401
 #, c-format
 msgid "Select %s Light Color"
-msgstr "选择 %s 个淡色"
+msgstr "밝은 %s색 선택"
 
 #: source/gx/terminix/profilewindow.d:507
 msgid "Show scrollbar"
-msgstr "显示滚动条"
+msgstr "스크롤바 보이기"
 
 #: source/gx/terminix/profilewindow.d:511
 msgid "Scroll on output"
-msgstr "输出时滚动"
+msgstr "출력시 스크롤"
 
 #: source/gx/terminix/profilewindow.d:515
 msgid "Scroll on keystroke"
-msgstr "击键时滚动"
+msgstr "키 스트로크에 스크롤"
 
 #: source/gx/terminix/profilewindow.d:519
 msgid "Limit scrollback to:"
-msgstr "回滚限制："
+msgstr "스크롤 제한:"
 
+# Terminix gettext pot file
 #: source/gx/terminix/profilewindow.d:560
 msgid "Backspace key generates"
-msgstr "按 Backspace 键产生"
+msgstr "Backspace 키 누를 때 생성할 것"
 
 #: source/gx/terminix/profilewindow.d:563
 #: source/gx/terminix/profilewindow.d:571
 msgid "Automatic"
-msgstr "自动"
+msgstr "자동"
 
 #: source/gx/terminix/profilewindow.d:563
 #: source/gx/terminix/profilewindow.d:571
@@ -471,7 +469,7 @@ msgstr "ASCII DEL"
 #: source/gx/terminix/profilewindow.d:563
 #: source/gx/terminix/profilewindow.d:571
 msgid "Escape sequence"
-msgstr "转义序列"
+msgstr "이스케이프 시퀀스"
 
 #: source/gx/terminix/profilewindow.d:563
 #: source/gx/terminix/profilewindow.d:571
@@ -480,75 +478,75 @@ msgstr "TTY"
 
 #: source/gx/terminix/profilewindow.d:568
 msgid "Delete key generates"
-msgstr "按 Delete 键产生"
+msgstr "Delete 키 누를 때 생성할 것"
 
 #: source/gx/terminix/profilewindow.d:576 source/gx/terminix/prefwindow.d:86
 #: source/gx/terminix/prefwindow.d:159
 #: source/gx/terminix/terminal/terminal.d:601
 msgid "Encoding"
-msgstr "编码"
+msgstr "인코딩"
 
 #: source/gx/terminix/profilewindow.d:591
 msgid "Ambiguous-width characters"
-msgstr "模糊宽度字符"
+msgstr "모호한 폭의 문자"
 
 #: source/gx/terminix/profilewindow.d:594
 msgid "Narrow"
-msgstr "窄"
+msgstr "좁음"
 
 #: source/gx/terminix/profilewindow.d:594
 msgid "Wide"
-msgstr "宽"
+msgstr "넓음"
 
 #: source/gx/terminix/profilewindow.d:620
 msgid "Run command as a login shell"
-msgstr "运行作为登录程序的命令"
+msgstr "로그인 셸로 명령어 실행"
 
 #: source/gx/terminix/profilewindow.d:624
 msgid "Run a custom command instead of my shell"
-msgstr "运行自定义命令而不是我的命令行外壳"
+msgstr "내 셸 대신 사용자 정의 명령어 실행"
 
 #: source/gx/terminix/profilewindow.d:640
 msgid "When command exits"
-msgstr "命令退出时"
+msgstr "명령어가 종료될 때"
 
 #: source/gx/terminix/profilewindow.d:642
 msgid "Exit the terminal"
-msgstr "退出终端"
+msgstr "터미널 나가기"
 
 #: source/gx/terminix/profilewindow.d:642
 msgid "Restart the command"
-msgstr "重启命令"
+msgstr "명령어 다시 시작"
 
 #: source/gx/terminix/profilewindow.d:642
 msgid "Hold the terminal open"
-msgstr "保持终端开启"
+msgstr "터미널 열림 유지"
 
 #: source/gx/terminix/encoding.d:18 source/gx/terminix/encoding.d:31
 #: source/gx/terminix/encoding.d:45 source/gx/terminix/encoding.d:67
 #: source/gx/terminix/encoding.d:78
 msgid "Western"
-msgstr "西方"
+msgstr "서유럽어"
 
 #: source/gx/terminix/encoding.d:19 source/gx/terminix/encoding.d:46
 #: source/gx/terminix/encoding.d:57 source/gx/terminix/encoding.d:76
 msgid "Central European"
-msgstr "中欧"
+msgstr "중앙 유럽어"
 
 #: source/gx/terminix/encoding.d:20
 msgid "South European"
-msgstr "南欧"
+msgstr "남유럽어"
 
 #: source/gx/terminix/encoding.d:21 source/gx/terminix/encoding.d:29
 #: source/gx/terminix/encoding.d:83
 msgid "Baltic"
-msgstr "波罗的语"
+msgstr "발트어"
 
 #: source/gx/terminix/encoding.d:22 source/gx/terminix/encoding.d:47
 #: source/gx/terminix/encoding.d:53 source/gx/terminix/encoding.d:54
 #: source/gx/terminix/encoding.d:59 source/gx/terminix/encoding.d:77
 msgid "Cyrillic"
-msgstr "西里尔语"
+msgstr "키릴어"
 
 # ************************************************
 # Encodings
@@ -556,188 +554,188 @@ msgstr "西里尔语"
 #: source/gx/terminix/encoding.d:23 source/gx/terminix/encoding.d:50
 #: source/gx/terminix/encoding.d:56 source/gx/terminix/encoding.d:82
 msgid "Arabic"
-msgstr "阿拉伯语"
+msgstr "아랍어"
 
 #: source/gx/terminix/encoding.d:24 source/gx/terminix/encoding.d:62
 #: source/gx/terminix/encoding.d:79
 msgid "Greek"
-msgstr "希腊语"
+msgstr "그리스어"
 
 #: source/gx/terminix/encoding.d:25
 msgid "Hebrew Visual"
-msgstr "希伯来语（视觉排布）"
+msgstr "시각 히브리어"
 
 #: source/gx/terminix/encoding.d:26 source/gx/terminix/encoding.d:49
 #: source/gx/terminix/encoding.d:65 source/gx/terminix/encoding.d:81
 msgid "Hebrew"
-msgstr "希伯来语"
+msgstr "히브리어"
 
 #: source/gx/terminix/encoding.d:27 source/gx/terminix/encoding.d:48
 #: source/gx/terminix/encoding.d:69 source/gx/terminix/encoding.d:80
 msgid "Turkish"
-msgstr "土耳其语"
+msgstr "터키어"
 
 #: source/gx/terminix/encoding.d:28
 msgid "Nordic"
-msgstr "北欧语言"
+msgstr "북유럽어"
 
 #: source/gx/terminix/encoding.d:30
 msgid "Celtic"
-msgstr "凯尔特语"
+msgstr "켈트어"
 
 #: source/gx/terminix/encoding.d:32 source/gx/terminix/encoding.d:68
 msgid "Romanian"
-msgstr "罗马尼亚语"
+msgstr "루마니아어"
 
 #: source/gx/terminix/encoding.d:33
 msgid "Unicode"
-msgstr "Unicode"
+msgstr "유니코드"
 
 #: source/gx/terminix/encoding.d:34
 msgid "Armenian"
-msgstr "亚美尼亚语"
+msgstr "미국어"
 
 #: source/gx/terminix/encoding.d:35 source/gx/terminix/encoding.d:36
 #: source/gx/terminix/encoding.d:40
 msgid "Chinese Traditional"
-msgstr "繁体中文"
+msgstr "중국어 정체"
 
 #: source/gx/terminix/encoding.d:37
 msgid "Cyrillic/Russian"
-msgstr "西里尔语/俄语"
+msgstr "키릴/러시아어"
 
 #: source/gx/terminix/encoding.d:38 source/gx/terminix/encoding.d:51
 #: source/gx/terminix/encoding.d:71
 msgid "Japanese"
-msgstr "日语"
+msgstr "일본어"
 
 #: source/gx/terminix/encoding.d:39 source/gx/terminix/encoding.d:52
 #: source/gx/terminix/encoding.d:74
 msgid "Korean"
-msgstr "韩语"
+msgstr "한국어"
 
 #: source/gx/terminix/encoding.d:41 source/gx/terminix/encoding.d:42
 #: source/gx/terminix/encoding.d:43
 msgid "Chinese Simplified"
-msgstr "简体中文"
+msgstr "중국어 간체"
 
 #: source/gx/terminix/encoding.d:44
 msgid "Georgian"
-msgstr "格鲁吉亚语"
+msgstr "조지아어"
 
 #: source/gx/terminix/encoding.d:55 source/gx/terminix/encoding.d:70
 msgid "Cyrillic/Ukrainian"
-msgstr "西里尔语/乌克兰语"
+msgstr "키릴/우크라이나어"
 
 #: source/gx/terminix/encoding.d:58
 msgid "Croatian"
-msgstr "克罗地亚语"
+msgstr "크로아티아어"
 
 #: source/gx/terminix/encoding.d:60
 msgid "Hindi"
-msgstr "印地语"
+msgstr "힌디어"
 
 #: source/gx/terminix/encoding.d:61
 msgid "Persian"
-msgstr "波斯"
+msgstr "페르시아어"
 
 #: source/gx/terminix/encoding.d:63
 msgid "Gujarati"
-msgstr "古吉拉特文 "
+msgstr "구즈라트어"
 
 #: source/gx/terminix/encoding.d:64
 msgid "Gurmukhi"
-msgstr "古木基文"
+msgstr "구르무키어"
 
 #: source/gx/terminix/encoding.d:66
 msgid "Icelandic"
-msgstr "冰岛语"
+msgstr "아이슬란드어"
 
 #: source/gx/terminix/encoding.d:72 source/gx/terminix/encoding.d:75
 #: source/gx/terminix/encoding.d:84
 msgid "Vietnamese"
-msgstr "越南语"
+msgstr "베트남어"
 
 #: source/gx/terminix/encoding.d:73
 msgid "Thai"
-msgstr "泰语"
+msgstr "태국어"
 
 #: source/gx/terminix/application.d:147 source/gx/terminix/session.d:1188
 #: source/gx/terminix/prefwindow.d:492
 msgid "New Session"
-msgstr "新建会话"
+msgstr "새 세션"
 
 #: source/gx/terminix/application.d:148 source/gx/terminix/prefwindow.d:492
 msgid "New Window"
-msgstr "新建窗口"
+msgstr "새 창"
 
 #: source/gx/terminix/application.d:152 source/gx/terminix/prefwindow.d:70
 msgid "Preferences"
-msgstr "首选项"
+msgstr "기본 설정"
 
 #: source/gx/terminix/application.d:154 source/gx/terminix/prefwindow.d:80
 msgid "Shortcuts"
-msgstr "快捷键"
+msgstr "바로 가기"
 
 #: source/gx/terminix/application.d:159
 msgid "About"
-msgstr "关于"
+msgstr "정보"
 
 #: source/gx/terminix/application.d:160
 msgid "Quit"
-msgstr "退出"
+msgstr "끝내기"
 
 #: source/gx/terminix/application.d:204
 msgid "Credits"
-msgstr "感谢名单"
+msgstr "크레딧"
 
 #: source/gx/terminix/application.d:393
 msgid "Set the working directory of the terminal"
-msgstr "设置终端的工作目录"
+msgstr "터미널 작업 디렉터리 설정"
 
 #: source/gx/terminix/application.d:393
 msgid "DIRECTORY"
-msgstr "DIRECTORY"
+msgstr ""
 
 #: source/gx/terminix/application.d:394
 msgid "Set the starting profile"
-msgstr "设置启动配置文件"
+msgstr "시작 프로파일 설정"
 
 #: source/gx/terminix/application.d:394
 msgid "PROFILE_NAME"
-msgstr "PROFILE_NAME"
+msgstr ""
 
 #: source/gx/terminix/application.d:395
 msgid "Open the specified session"
-msgstr "打开指定的会话"
+msgstr "특정 세션 열기"
 
 #: source/gx/terminix/application.d:395
 msgid "SESSION_NAME"
-msgstr "SESSION_NAME"
+msgstr ""
 
 #: source/gx/terminix/application.d:396
 msgid "Send an action to current Terminix instance"
-msgstr "向当前 Terminix 实例发送动作"
+msgstr "현재 Terminix 인스턴스로 동작 보내기"
 
 #: source/gx/terminix/application.d:396
 msgid "ACTION_NAME"
-msgstr "ACTION_NAME"
+msgstr ""
 
 #: source/gx/terminix/application.d:397
 msgid "Execute the passed command"
-msgstr "执行传入的命令"
+msgstr "전달된 명령어 실행"
 
 #: source/gx/terminix/application.d:397
 msgid "EXECUTE"
-msgstr "EXECUTE"
+msgstr ""
 
 #: source/gx/terminix/application.d:398
 msgid "Hidden argument to pass terminal UUID"
-msgstr "传入终端 UUID 的隐藏参数"
+msgstr "터미널 UUID를 전달하기 위한 숨겨진 독립변수"
 
 #: source/gx/terminix/application.d:398
 msgid "TERMINAL_UUID"
-msgstr "TERMINAL_UUID"
+msgstr ""
 
 #: source/gx/terminix/application.d:538
 msgid ""
@@ -745,94 +743,95 @@ msgid ""
 "This issue is not serious, but correcting it will improve your experience.\n"
 "Click the link below for more information:"
 msgstr ""
-"终端配置似乎存在问题。这并不是严重问题，但是更正这些问题将改善你的使用体验。"
-"点击如下链接以获取更多信息："
+"터미널 설정에 이슈가 있는 것으로 보입니다.\n"
+"이 이슈는 심각하지 않습니다. 그러나 고친다면 사용 경험이 향상됩니다\n"
+"자세한 정보는 아래 링크를 누르세요."
 
 #: source/gx/terminix/application.d:539
 msgid "Configuration Issue Detected"
-msgstr "检测到配置问题"
+msgstr "설정 이슈 감지됨"
 
 #: source/gx/terminix/application.d:551
 msgid "Do not show this message again"
-msgstr "不再显示该信息"
+msgstr "이 메시지 다시 보지 않기"
 
 #: source/gx/terminix/session.d:450
 msgid "Could not locate dropped terminal"
-msgstr "无法定位放置的终端"
+msgstr "중단된 터미널을 위치시킬 수 없습니다"
 
 #: source/gx/terminix/session.d:455
 msgid "Could not locate session for dropped terminal"
-msgstr "无法定位放置的终端的会话"
+msgstr "중단된 터미널을 위한 세션을 위치시킬 수 없습니다"
 
 #: source/gx/terminix/session.d:1154
 msgid "Name"
-msgstr "名称"
+msgstr "이름"
 
 #: source/gx/terminix/session.d:1165 source/gx/terminix/prefwindow.d:326
 msgid "Profile"
-msgstr "配置方案"
+msgstr "프로파일"
 
 #: source/gx/terminix/prefwindow.d:77
 msgid "Global"
-msgstr "全局"
+msgstr "전역"
 
 #: source/gx/terminix/prefwindow.d:83
 #: source/gx/terminix/terminal/terminal.d:600
 msgid "Profiles"
-msgstr "配置方案"
+msgstr "프로파일"
 
 #: source/gx/terminix/prefwindow.d:121
 msgid "Encodings showing in menu:"
-msgstr "菜单中显示的编码："
+msgstr "메뉴에 보일 인코딩:"
 
 #: source/gx/terminix/prefwindow.d:157
 msgid "Enabled"
-msgstr "已启用"
+msgstr "활성화됨"
 
 #: source/gx/terminix/prefwindow.d:208
 msgid "Action"
-msgstr "动作"
+msgstr "동작"
 
 #: source/gx/terminix/prefwindow.d:235
 msgid "Shortcut Key"
-msgstr "快捷键"
+msgstr "단축키"
 
 #: source/gx/terminix/prefwindow.d:324 source/gx/terminix/prefwindow.d:543
 #: source/gx/terminix/appwindow.d:91
 msgid "Default"
-msgstr "默认"
+msgstr "기본값"
 
 #: source/gx/terminix/prefwindow.d:340
 msgid "New"
-msgstr "新建"
+msgstr "새로 만들기"
 
 #: source/gx/terminix/prefwindow.d:353
 msgid "Edit"
-msgstr "编辑"
+msgstr "편집"
 
 #: source/gx/terminix/prefwindow.d:356
 msgid "Delete"
-msgstr "删除"
+msgstr "삭제"
 
 #: source/gx/terminix/prefwindow.d:459
 msgid "Behavior"
-msgstr "行为"
+msgstr "행동"
 
 #: source/gx/terminix/prefwindow.d:465
 msgid "Prompt when creating a new session"
-msgstr "创建新会话时提示"
+msgstr "새 세션을 만들 때 세션 설정 입력받기"
 
 #: source/gx/terminix/prefwindow.d:470
 msgid "Focus a terminal when the mouse moves over it"
-msgstr "在鼠标移入时激活终端"
+msgstr "마우스가 위에서 움직일 때 터미널에 포커스 하기"
 
 #: source/gx/terminix/prefwindow.d:475
 msgid "Autohide the mouse pointer when typing"
-msgstr "打字时自动隐藏鼠标指针"
+msgstr "타이핑 할 때 마우스 포인터 자동으로 숨기기"
 
 #: source/gx/terminix/prefwindow.d:481
 msgid "Send desktop notification on process complete"
-msgstr "进程完成时发送桌面通知"
+msgstr "프로세스가 완료될때 데스크톱 알림 보내기"
 
 #: source/gx/terminix/prefwindow.d:489
 msgid "On new instance"
@@ -841,163 +840,162 @@ msgstr ""
 #: source/gx/terminix/prefwindow.d:492
 #, fuzzy
 msgid "Split Horizontal"
-msgstr "水平分割"
+msgstr "수평으로 분할"
 
 #: source/gx/terminix/prefwindow.d:492
 #, fuzzy
 msgid "Split Vertical"
-msgstr "垂直分割"
+msgstr "수직으로 분할"
 
 #: source/gx/terminix/prefwindow.d:498
 #: source/gx/terminix/terminal/terminal.d:875
 #: source/gx/terminix/terminal/terminal.d:893
 msgid "Paste"
-msgstr "粘贴"
+msgstr "붙여넣기"
 
 #: source/gx/terminix/prefwindow.d:504
 msgid "Warn when attempting unsafe paste"
-msgstr "进行不安全复制时警告"
+msgstr "위험한 붙여넣기를 할 때 경고하기"
 
 #: source/gx/terminix/prefwindow.d:509
 msgid "Strip first character of paste if comment or variable declaration"
-msgstr "如果粘贴内容为注释或变量声明则切除第一个字符"
+msgstr "붙여넣기 한 것이 주석 또는 변수 선언문일 경우 첫 문자 삭제하기"
 
 #: source/gx/terminix/prefwindow.d:514
 msgid "Appearance"
-msgstr "外观"
+msgstr "모양새"
 
 #: source/gx/terminix/prefwindow.d:521
 msgid "Enable transparency, requires re-start"
-msgstr "开启透明终端，需要重启终端"
+msgstr "투명도 활성화 하기(다시 시작 필요함)"
 
 #: source/gx/terminix/prefwindow.d:527
 msgid "Use small size for terminal titlebars"
-msgstr "使用较小的终端标题栏"
+msgstr "작은 크기의 터미널 타이틀바 사용"
 
 #: source/gx/terminix/prefwindow.d:532
 msgid "Use a wide handle for splitters"
-msgstr "使用较宽的分割手柄"
+msgstr "스플라이터에 대해 넓은 핸들 사용하기"
 
 #: source/gx/terminix/prefwindow.d:539
 msgid "Theme Variant"
-msgstr "主题变种"
+msgstr "테마 종류"
 
 #: source/gx/terminix/prefwindow.d:544
 msgid "Light"
-msgstr "淡色"
+msgstr "밝음"
 
 #: source/gx/terminix/prefwindow.d:545
 msgid "Dark"
-msgstr "深色"
+msgstr "어두움"
 
 #: source/gx/terminix/terminal/layout.d:28
 msgid "Layout Options"
-msgstr "布局选项"
+msgstr "레이아웃 옵션"
 
 #: source/gx/terminix/terminal/layout.d:28
 msgid "OK"
-msgstr "确定"
+msgstr "확인"
 
 #: source/gx/terminix/terminal/layout.d:28
 msgid "Cancel"
-msgstr "取消"
+msgstr "취소"
 
 #: source/gx/terminix/terminal/layout.d:43
 msgid "Active"
-msgstr "会话活动"
+msgstr "동작"
 
 #: source/gx/terminix/terminal/layout.d:49
 msgid "Title"
-msgstr "标题"
+msgstr "제목"
 
 #: source/gx/terminix/terminal/layout.d:57
 msgid "Session Load"
-msgstr "载入会话"
+msgstr "세션"
 
 #: source/gx/terminix/terminal/layout.d:73
 msgid ""
 "Active options are always in effect and apply immediately.\n"
 "Session Load options only apply when loading a session file."
 msgstr ""
-"会话活动选项一直生效且立即应用。\n"
-"会话载入选项仅在载入会话文件时生效。"
+"활성 옵션은 항상 영향을 주며 바로 적용됩니다.\n"
+"세션 불러오기 옵션은 세션 파일을 불러올 때만 적용됩니다."
 
 #: source/gx/terminix/terminal/search.d:117
 msgid "Search Options"
-msgstr "搜索选项"
+msgstr "검색 옵션"
 
 #: source/gx/terminix/terminal/search.d:183
 msgid "Match case"
-msgstr "区分大小写"
+msgstr "일치 경우"
 
 #: source/gx/terminix/terminal/search.d:184
 msgid "Match entire word only"
-msgstr "全字匹配"
+msgstr "전체 단어 일치만"
 
 #: source/gx/terminix/terminal/search.d:185
 msgid "Match as regular expression"
-msgstr "使用正则表达式匹配"
+msgstr "정규 표현식으로 일치"
 
 #: source/gx/terminix/terminal/search.d:186
 msgid "Wrap around"
-msgstr "换行"
+msgstr "주변 감싸기"
 
 #: source/gx/terminix/terminal/terminal.d:323
 #: source/gx/terminix/terminal/terminal.d:741
 msgid "Terminal"
-msgstr "终端"
+msgstr "터미널"
 
 #: source/gx/terminix/terminal/terminal.d:349
 #: source/gx/terminix/appwindow.d:401
 msgid "Close"
-msgstr "关闭"
+msgstr "닫기"
 
 #: source/gx/terminix/terminal/terminal.d:358
 #: source/gx/terminix/terminal/terminal.d:772
-#, fuzzy
 msgid "Maximize"
-msgstr "最大化"
+msgstr "최대화"
 
 #: source/gx/terminix/terminal/terminal.d:369
 msgid "Disable input synchronization for this terminal"
-msgstr "为此终端关闭输入同步"
+msgstr "이 터미널에 대해 입력 동기화 비활성화 하기"
 
 #: source/gx/terminix/terminal/terminal.d:402
 msgid "Edit Profile"
-msgstr "编辑配置方案"
+msgstr "프로파일 편집"
 
 #: source/gx/terminix/terminal/terminal.d:531
 #: source/gx/terminix/appwindow.d:622
 msgid "There are processes that are still running, close anyway?"
-msgstr "仍有正在运行的进程，依然要关闭吗？"
+msgstr "프로세스가 여전히 실행중입니다. 어떻게든 닫을까요?"
 
 #: source/gx/terminix/terminal/terminal.d:590
 msgid "Save…"
-msgstr "保存…"
+msgstr "저장…"
 
 #: source/gx/terminix/terminal/terminal.d:591
 msgid "Find…"
-msgstr "查找…"
+msgstr "찾기…"
 
 #: source/gx/terminix/terminal/terminal.d:592
 msgid "Layout Options…"
-msgstr "布局选项…"
+msgstr "레이아웃 옵션…"
 
 #: source/gx/terminix/terminal/terminal.d:596
 msgid "Read-Only"
-msgstr "只读"
+msgstr "읽기전용"
 
 #: source/gx/terminix/terminal/terminal.d:615
 msgid "Split Right"
-msgstr "向右分割"
+msgstr "오른쪽으로 분할"
 
 #: source/gx/terminix/terminal/terminal.d:619
 msgid "Split Down"
-msgstr "向下分割"
+msgstr "아래로 분할"
 
 #: source/gx/terminix/terminal/terminal.d:769
 msgid "Restore"
-msgstr ""
+msgstr "복원"
 
 #: source/gx/terminix/terminal/terminal.d:869
 msgid "Open Link"
@@ -1010,155 +1008,156 @@ msgstr ""
 #: source/gx/terminix/terminal/terminal.d:874
 #: source/gx/terminix/terminal/terminal.d:891
 msgid "Copy"
-msgstr "复制"
+msgstr "복사"
 
 #: source/gx/terminix/terminal/terminal.d:876
 #: source/gx/terminix/terminal/terminal.d:895
 msgid "Select All"
-msgstr "全选"
+msgstr "모두 선택"
 
 #: source/gx/terminix/terminal/terminal.d:1228
 msgid "Unexpected error occurred, no additional information available"
-msgstr "发生未知错误，无其他可用信息"
+msgstr ""
+"예상하지 못한 오류가 발생했습니다. 이용 가능한 추가적인 정보가 없습니다."
 
 #: source/gx/terminix/terminal/terminal.d:1234
 #, c-format
 msgid "Unexpected error occurred: %s"
-msgstr "发生未知错误：%s"
+msgstr "예상하지 못한 오류가 발생했습니다. %s"
 
 #: source/gx/terminix/terminal/terminal.d:1550
 msgid "Save Terminal Output"
-msgstr "保存终端输出"
+msgstr "터미널 출력 저장"
 
 #: source/gx/terminix/terminal/terminal.d:1556
 msgid "All Text Files"
-msgstr "所有文本文件"
+msgstr "모든 텍스트 파일"
 
 #: source/gx/terminix/terminal/terminal.d:1560
 #: source/gx/terminix/appwindow.d:669
 msgid "All Files"
-msgstr "所有文件"
+msgstr "모든 파일"
 
 #: source/gx/terminix/terminal/terminal.d:1863
 #, c-format
 msgid "The child process exited normally with status %d"
-msgstr "子进程以 %d 状态正常退出"
+msgstr "자식 프로세스가 다음과 같은 상태로 정상적으로 종료되었습니다. %d"
 
 #: source/gx/terminix/terminal/terminal.d:1864
 #, c-format
 msgid "The child process was aborted by signal %d."
-msgstr "子进程被 %d 信号中止。"
+msgstr "자식 프로세스가 다음과 같은 신호에 의해 중지되었습니다. %d"
 
 #: source/gx/terminix/terminal/terminal.d:1865
 msgid "The child process was aborted."
-msgstr "子进程已被中止。"
+msgstr "자식 프로세스가 중지되었습니다."
 
 #: source/gx/terminix/terminal/terminal.d:1871
 msgid "Relaunch"
-msgstr "重新启动"
+msgstr "다시 시작"
 
 #: source/gx/terminix/terminal/terminal.d:1911
 msgid "This command is asking for Administrative access to your computer"
-msgstr "命令正在请求计算机的管理员权限"
+msgstr "이 명령어가 컴퓨터로의 관리자 액세스를 요청합니다"
 
 #: source/gx/terminix/terminal/terminal.d:1912
 msgid "Copying commands from the internet can be dangerous. "
-msgstr "从互联网复制命令有一定危险性。"
+msgstr "인터넷에서 명령어를 복사하는 것은 위험할 수 있습니다. "
 
 #: source/gx/terminix/terminal/terminal.d:1913
 msgid "Be sure you understand what each part of this command does."
-msgstr "你应当确认命令每个部分的作用。"
+msgstr "이 명령어의 각 부분이 무엇을 하는지 분명히 이해하세요."
 
 #: source/gx/terminix/terminal/terminal.d:1915
 msgid "Don't Paste"
-msgstr "不要粘贴"
+msgstr "붙여넣지 마세요"
 
 #: source/gx/terminix/terminal/terminal.d:1916
 msgid "Paste Anyway"
-msgstr "依然粘贴"
+msgstr "어떻게든 붙여넣기"
 
 #: source/gx/terminix/cmdparams.d:73
 #, c-format
 msgid "Ignoring parameter working-directory as '%s' is not a directory"
-msgstr "忽略 working-directory 参数，因为“%s”不是目录"
+msgstr "'%s'이(가) 디렉터리가 아니므로, 작업 디렉터리 파라미터를 무시합니다"
 
 #: source/gx/terminix/cmdparams.d:82
 #, c-format
 msgid "Ignoring parameter session as '%s' does not exist"
-msgstr "忽略 session 参数，因为“%s”不存在"
+msgstr "'%s'이(가) 없으므로 파라미터 세션을 무시합니다"
 
 #: source/gx/terminix/cmdparams.d:91
 msgid ""
 "You cannot load a session and set a profile/working directory/execute "
 "command option, please choose one or the other"
 msgstr ""
-"你不能在载入会话时同时设置配置档案、工作目录及执行的命令行选项，请选择其中一"
-"个操作"
+"세션 불러오기와 프로파일/작업 디렉터리/실행 명령어 설정을 하실 수 없습니다. "
+"하나 또는 다른것을 선택하세요."
 
 #: source/gx/terminix/appwindow.d:181
 msgid "View session sidebar"
-msgstr "显示会话侧边栏"
+msgstr "세션 사이드바 보기"
 
 #: source/gx/terminix/appwindow.d:193
 msgid "Create a new session"
-msgstr "创建会话"
+msgstr "새 세션 만들기"
 
 #: source/gx/terminix/appwindow.d:372
 msgid "Change Session Name"
-msgstr "更改会话名称"
+msgstr "세션 이름 바꾸기"
 
 #: source/gx/terminix/appwindow.d:372
 msgid "Enter a new name for the session"
-msgstr "为会话新建名称"
+msgstr "새 세션 이름 입력"
 
 #: source/gx/terminix/appwindow.d:398
 msgid "Load…"
-msgstr "载入…"
+msgstr "불러오기…"
 
 #: source/gx/terminix/appwindow.d:399
 msgid "Save"
-msgstr "保存"
+msgstr "저장"
 
 #: source/gx/terminix/appwindow.d:400
 msgid "Save As…"
-msgstr "另存为…"
+msgstr "다른 이름으로 저장…"
 
 #: source/gx/terminix/appwindow.d:405
 msgid "Name…"
-msgstr "名称…"
+msgstr "이름…"
 
 #: source/gx/terminix/appwindow.d:406
 msgid "Synchronize Input"
-msgstr "同步输入"
+msgstr "입력 동기화"
 
 #: source/gx/terminix/appwindow.d:411
 msgid "GC"
-msgstr ""
+msgstr "GC"
 
 #: source/gx/terminix/appwindow.d:665
 msgid "All JSON Files"
-msgstr "所有 JSON 文件"
+msgstr "모든 JSON 파일"
 
 #: source/gx/terminix/appwindow.d:678
 #, c-format
 msgid "Filename '%s' does not exist"
-msgstr "文件名“%s”不存在"
+msgstr "파일 이름 '%s'이(가) 없습니다."
 
 #: source/gx/terminix/appwindow.d:703
 msgid "Load Session"
-msgstr "载入会话"
+msgstr "세션 불러오기"
 
 #: source/gx/terminix/appwindow.d:716
 msgid "Could not load session due to unexpected error."
-msgstr "发生未知错误，无法载入会话。"
+msgstr "예상하지 못한 오류로 인해 세션을 불러올 수 없습니다."
 
 #: source/gx/terminix/appwindow.d:716
 msgid "Error Loading Session"
-msgstr "载入会话出错"
+msgstr "세션 불러오기 오류"
 
 #: source/gx/terminix/appwindow.d:731
 msgid "Save Session"
-msgstr "保存会话"
+msgstr "세션 저장"
 
 #: source/gx/terminix/appwindow.d:766
 #: data/pkg/desktop/com.gexperts.Terminix.desktop.in:3
@@ -1167,44 +1166,42 @@ msgstr "Terminix"
 
 #: source/gx/gtk/actions.d:23
 msgid "disabled"
-msgstr "已禁用"
+msgstr "비활성화됨"
 
 #: source/app.d:41
 #, c-format
 msgid "Your GTK version is too old, you need at least GTK %d.%d.%d!"
-msgstr "你的 GTK 版本太老，需要至少 GTK %d.%d.%d！"
+msgstr ""
+"GTK 버전이 너무 오래 되었습니다, 적어도 GTK %d.%d.%d 버전이 필요합니다!"
 
 #: source/app.d:61
 msgid "Unexpected exception occurred"
-msgstr "发生未预期错误"
+msgstr "예상하지 못한 예외 발생"
 
 #: source/app.d:62
 msgid "Error: "
-msgstr "错误："
+msgstr "오류: "
 
-# ******************
-# Nautilus extension
-# ******************
 #: data/nautilus/open-terminix.py:43
 msgid "Open in Terminix…"
-msgstr "使用 Terminix 打开…"
+msgstr "Terminix에서 열기…"
 
 #: data/nautilus/open-terminix.py:44
 #, python-format
 msgid "Open Terminix In %s"
-msgstr "在 %s 打开 Terminix"
+msgstr "%s에서 터미널 열기"
 
 #: data/nautilus/open-terminix.py:50
 msgid "Open Terminix Here…"
-msgstr "在此打开 Terminix…"
+msgstr "여기서 Terminix 열기…"
 
 #: data/nautilus/open-terminix.py:51
 msgid "Open Terminix In This Directory"
-msgstr "在此目录打开 Terminix"
+msgstr "이 디렉터리에서 Terminix 열기"
 
 #: data/pkg/desktop/com.gexperts.Terminix.desktop.in:4
 msgid "A tiling terminal for Gnome"
-msgstr "GNOME 的平铺终端模拟器"
+msgstr "그놈을 위한 타일링 터미널"
 
 #: data/pkg/desktop/com.gexperts.Terminix.desktop.in:10
 msgid "utilities-terminal"
@@ -1214,25 +1211,25 @@ msgstr "utilities-terminal"
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Application"
-msgstr "动作"
+msgstr "동작"
 
 #: data/resources/ui/shortcuts.ui:19
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Open a new window"
-msgstr "新建窗口"
+msgstr "새 창"
 
 #: data/resources/ui/shortcuts.ui:25
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Open a new session"
-msgstr "创建会话"
+msgstr "새 세션 만들기"
 
 #: data/resources/ui/shortcuts.ui:31
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Open preferences"
-msgstr "首选项"
+msgstr "기본 설정"
 
 #: data/resources/ui/shortcuts.ui:37
 msgctxt "shortcut window"
@@ -1243,109 +1240,109 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Window"
-msgstr "新建窗口"
+msgstr "새 창"
 
 #: data/resources/ui/shortcuts.ui:49
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Toggle fullscreen mode"
-msgstr "全屏"
+msgstr "전체화면"
 
 #: data/resources/ui/shortcuts.ui:55
 #, fuzzy
 msgctxt "shortcut window"
 msgid "View session sidebar"
-msgstr "显示会话侧边栏"
+msgstr "세션 사이드바 보기"
 
 #: data/resources/ui/shortcuts.ui:61
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to next session"
-msgstr "切换到会话 10"
+msgstr "다음 세션으로 전환"
 
 #: data/resources/ui/shortcuts.ui:67
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to previous session"
-msgstr "切换到上一个终端"
+msgstr "이전 세션으로 전환"
 
 #: data/resources/ui/shortcuts.ui:73
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 1"
-msgstr "切换到会话 1"
+msgstr "세션 1번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:79
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 2"
-msgstr "切换到会话 2"
+msgstr "세션 2번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:85
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 3"
-msgstr "切换到会话 3"
+msgstr "세션 3번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:91
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 4"
-msgstr "切换到会话 4"
+msgstr "세션 4번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:97
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 5"
-msgstr "切换到会话 5"
+msgstr "세션 5번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:103
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 6"
-msgstr "切换到会话 6"
+msgstr "세션 6번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:109
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 7"
-msgstr "切换到会话 7"
+msgstr "세션 7번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:115
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 8"
-msgstr "切换到会话 8"
+msgstr "세션 8번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:121
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 9"
-msgstr "切换到会话 9"
+msgstr "세션 9번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:127
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 10"
-msgstr "切换到会话 10"
+msgstr "세션 10번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:143
 #, fuzzy
 msgctxt "shortcut window"
 msgid "File"
-msgstr "所有文件"
+msgstr "모든 파일"
 
 #: data/resources/ui/shortcuts.ui:147
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Close the current session"
-msgstr "打开指定的会话"
+msgstr "특정 세션 열기"
 
 #: data/resources/ui/shortcuts.ui:153
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Save the current session"
-msgstr "打开指定的会话"
+msgstr "특정 세션 열기"
 
 #: data/resources/ui/shortcuts.ui:159
 msgctxt "shortcut window"
@@ -1356,7 +1353,7 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Load the current session"
-msgstr "载入会话"
+msgstr "세션 불러오기"
 
 #: data/resources/ui/shortcuts.ui:173
 msgctxt "shortcut window"
@@ -1367,25 +1364,25 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Resize the terminal up"
-msgstr "退出终端"
+msgstr "터미널 나가기"
 
 #: data/resources/ui/shortcuts.ui:183
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Resize the terminal down"
-msgstr "保持终端开启"
+msgstr "터미널 열림 유지"
 
 #: data/resources/ui/shortcuts.ui:189
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Resize the terminal left"
-msgstr "退出终端"
+msgstr "터미널 나가기"
 
 #: data/resources/ui/shortcuts.ui:195
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Resize the terminal right"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:203
 msgctxt "shortcut window"
@@ -1396,127 +1393,127 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to next terminal"
-msgstr "切换到下一个终端"
+msgstr "다음 터미널로 전환"
 
 #: data/resources/ui/shortcuts.ui:213
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to previous terminal"
-msgstr "切换到上一个终端"
+msgstr "이전 터미널로 전환"
 
 #: data/resources/ui/shortcuts.ui:219
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to the terminal up"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:225
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to the terminal down"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:231
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to the terminal left"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:237
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to the terminal right"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:243
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 1"
-msgstr "切换到终端 1"
+msgstr "터미널 1번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:249
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 2"
-msgstr "切换到终端 2"
+msgstr "터미널 2번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:255
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 3"
-msgstr "切换到终端 3"
+msgstr "터미널 3번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:261
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 4"
-msgstr "切换到终端 4"
+msgstr "터미널 4번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:267
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 5"
-msgstr "切换到终端 5"
+msgstr "터미널 5번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:273
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 6"
-msgstr "切换到终端 6"
+msgstr "터미널 6번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:279
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 7"
-msgstr "切换到终端 7"
+msgstr "터미널 7번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:285
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 8"
-msgstr "切换到终端 8"
+msgstr "터미널 8번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:291
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 9"
-msgstr "切换到终端 9"
+msgstr "터미널 9번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:297
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 10"
-msgstr "切换到终端 10"
+msgstr "터미널 10번으로 전환"
 
 #: data/resources/ui/shortcuts.ui:313
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Split"
-msgstr "向下分割"
+msgstr "아래로 분할"
 
 #: data/resources/ui/shortcuts.ui:317
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Split horizontal"
-msgstr "水平分割"
+msgstr "수평으로 분할"
 
 #: data/resources/ui/shortcuts.ui:323
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Split Vertical"
-msgstr "垂直分割"
+msgstr "수직으로 분할"
 
 #: data/resources/ui/shortcuts.ui:331 data/resources/ui/shortcuts.ui:335
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Find"
-msgstr "查找…"
+msgstr "찾기…"
 
 #: data/resources/ui/shortcuts.ui:341
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Find next"
-msgstr "查找下一个"
+msgstr "다음 찾기"
 
 # ***********************************************
 # Keyboard shortcuts to the end, these are shown
@@ -1527,7 +1524,7 @@ msgstr "查找下一个"
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Find previous"
-msgstr "查找上一个"
+msgstr "이전 찾기"
 
 #: data/resources/ui/shortcuts.ui:355
 msgctxt "shortcut window"
@@ -1538,19 +1535,19 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Copy"
-msgstr "复制"
+msgstr "복사"
 
 #: data/resources/ui/shortcuts.ui:365
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Paste"
-msgstr "粘贴"
+msgstr "붙여넣기"
 
 #: data/resources/ui/shortcuts.ui:371
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Select all"
-msgstr "全选"
+msgstr "모두 선택"
 
 #: data/resources/ui/shortcuts.ui:379
 msgctxt "shortcut window"
@@ -1571,7 +1568,7 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Zoom normal size"
-msgstr "正常缩放"
+msgstr "확대 원래대로"
 
 #: data/resources/ui/shortcuts.ui:403
 msgctxt "shortcut window"
@@ -1582,48 +1579,40 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Save terminal contents"
-msgstr "保存终端输出"
+msgstr "터미널 출력 저장"
 
 #: data/resources/ui/shortcuts.ui:413
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Close terminal"
-msgstr "终端"
+msgstr "터미널"
 
 #: data/resources/ui/shortcuts.ui:419
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Maximize terminal"
-msgstr "退出终端"
+msgstr "터미널 나가기"
 
 #: data/resources/ui/shortcuts.ui:425
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Current profile preferences"
-msgstr "配置方案首选项"
+msgstr "프로파일 설정"
 
 #: data/resources/ui/shortcuts.ui:431
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Toggle read only"
-msgstr "只读"
+msgstr "읽기전용"
 
 #: data/resources/ui/shortcuts.ui:437
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Layout options"
-msgstr "布局选项"
-
-#~ msgid "Enable the menu accelerator key (F10 by default)"
-#~ msgstr "启用菜单快捷键（默认为 F10）"
+msgstr "레이아웃 옵션"
 
 #~ msgid "Enter Custom Title"
-#~ msgstr "输入自定义标题"
-
-#~ msgid ""
-#~ "Enter a new title to override the one specified by the profile. To reset "
-#~ "it to the profile setting, leave it blank."
-#~ msgstr "输入新标题以替换配置方案指定的标题。留空以重置为配置方案默认值。"
+#~ msgstr "사용자 정의 제목 입력"
 
 #~ msgid "Title…"
-#~ msgstr "标题…"
+#~ msgstr "제목…"

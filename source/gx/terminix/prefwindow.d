@@ -136,10 +136,9 @@ private:
 
         CellRendererToggle toggle = new CellRendererToggle();
         toggle.setActivatable(true);
-        toggle.addOnToggled(delegate(string path, CellRendererToggle crt) {
+        toggle.addOnToggled(delegate(string path, CellRendererToggle) {
             TreeIter iter = new TreeIter();
             ls.getIter(iter, new TreePath(path));
-            string[] menuEncodings = gsSettings.getStrv(SETTINGS_ENCODINGS_KEY);
             string encoding = ls.getValue(iter, COLUMN_ENCODING).getString();
             bool enabled = ls.getValue(iter, COLUMN_IS_ENABLED).getBoolean();
             trace("Menu encoding clicked for " ~ encoding);
@@ -212,24 +211,26 @@ private:
 
         CellRendererAccel craShortcut = new CellRendererAccel();
         craShortcut.setProperty("editable", 1);
-        craShortcut.addOnAccelCleared(delegate(string path, CellRendererAccel cra) {
+        craShortcut.setProperty("accel-mode", GtkCellRendererAccelMode.GTK);
+        craShortcut.addOnAccelCleared(delegate(string path, CellRendererAccel) {
             trace("Clearing shortcut");
             TreeIter iter = new TreeIter();
             tsShortcuts.getIter(iter, new TreePath(path));
-            tsShortcuts.setValue(iter, COLUMN_SHORTCUT, SHORTCUT_DISABLED);
+            tsShortcuts.setValue(iter, COLUMN_SHORTCUT, _(SHORTCUT_DISABLED));
             //Note accelerator changed by app which is monitoring gsetting changes
             gsShortcuts.setString(tsShortcuts.getValueString(iter, COLUMN_ACTION_NAME), SHORTCUT_DISABLED);
         });
-        craShortcut.addOnAccelEdited(delegate(string path, uint accelKey, GdkModifierType accelMods, uint hardwareKeycode, CellRendererAccel cra) {
-            trace("Updating shortcut");
+        craShortcut.addOnAccelEdited(delegate(string path, uint accelKey, GdkModifierType accelMods, uint, CellRendererAccel) {
+            string label = AccelGroup.acceleratorGetLabel(accelKey, accelMods);
+            string name = AccelGroup.acceleratorName(accelKey, accelMods);
+            trace("Updating shortcut as " ~ label);
             TreeIter iter = new TreeIter();
             tsShortcuts.getIter(iter, new TreePath(path));
-            string label = AccelGroup.acceleratorName(accelKey, accelMods);
             tsShortcuts.setValue(iter, COLUMN_SHORTCUT, label);
             //Note accelerator changed by app which is monitoring gsetting changes
             string action = tsShortcuts.getValueString(iter, COLUMN_ACTION_NAME);
             trace(format("Setting action %s to shortcut %s", action, label));
-            gsShortcuts.setString(action, label);
+            gsShortcuts.setString(action, name);
         });
         column = new TreeViewColumn(_("Shortcut Key"), craShortcut, "text", COLUMN_SHORTCUT);
 
@@ -258,7 +259,7 @@ private:
                 currentPrefix = prefix;
                 currentIter = appendValues(ts, null, [_(prefix)]);
             }
-            appendValues(ts, currentIter, [_(id), gsShortcuts.getString(key), key]);
+            appendValues(ts, currentIter, [_(id), acceleratorNameToLabel(gsShortcuts.getString(key)), key]);
         }
     }
 
@@ -337,7 +338,7 @@ private:
         bButtons.setVexpand(true);
 
         btnNew = new Button(_("New"));
-        btnNew.addOnClicked(delegate(Button button) {
+        btnNew.addOnClicked(delegate(Button) {
             ProfileInfo profile = prfMgr.createProfile(SETTINGS_PROFILE_NEW_NAME_VALUE);
             //profiles ~= profile;
             addProfile(profile);
@@ -350,10 +351,10 @@ private:
 		bButtons.add(btnClone);
 		*/
         btnEdit = new Button(_("Edit"));
-        btnEdit.addOnClicked(delegate(Button button) { editProfile(); });
+        btnEdit.addOnClicked(delegate(Button) { editProfile(); });
         bButtons.add(btnEdit);
         btnDelete = new Button(_("Delete"));
-        btnDelete.addOnClicked(delegate(Button button) {
+        btnDelete.addOnClicked(delegate(Button) {
             ProfileInfo profile = getSelectedProfile();
             if (profile.uuid !is null) {
                 //If profile window for this profile is open, close it first 
@@ -401,7 +402,6 @@ private:
         lsProfiles.setValue(iter, 2, profile.uuid);
         Settings ps = prfMgr.getProfileSettings(profile.uuid);
         ps.addOnChanged(delegate(string key, Settings settings) {
-            trace("Key changed " ~ key);
             if (key == SETTINGS_PROFILE_VISIBLE_NAME_KEY) {
                 foreach (uuid, ps; profiles) {
                     if (ps == settings) {
@@ -466,11 +466,6 @@ private:
         gsSettings.bind(SETTINGS_PROMPT_ON_NEW_SESSION_KEY, cbPrompt, "active", GSettingsBindFlags.DEFAULT);
         add(cbPrompt);
         
-        //Enable/Disable F10 accelerator in GTK
-        CheckButton cbMenuAccelerator = new CheckButton(_("Enable the menu accelerator key (F10 by default)"));
-        gsSettings.bind(SETTINGS_MENU_ACCELERATOR_KEY, cbMenuAccelerator, "active", GSettingsBindFlags.DEFAULT);
-        add(cbMenuAccelerator);
-
         //Focus follows the mouse
         CheckButton cbFocusMouse = new CheckButton(_("Focus a terminal when the mouse moves over it"));
         gsSettings.bind(SETTINGS_TERMINAL_FOCUS_FOLLOWS_MOUSE_KEY, cbFocusMouse, "active", GSettingsBindFlags.DEFAULT);
@@ -488,6 +483,18 @@ private:
             add(cbNotify);
         }
 
+        //New Instance Options
+        Box bNewInstance = new Box(Orientation.HORIZONTAL, 6);
+        
+        Label lblNewInstance = new Label(_("On new instance"));
+        lblNewInstance.setHalign(Align.END);
+        bNewInstance.add(lblNewInstance);
+        ComboBox cbNewInstance = createNameValueCombo([_("New Window"), _("New Session"), _("Split Horizontal"), _("Split Vertical")], SETTINGS_NEW_INSTANCE_MODE_VALUES);
+        gsSettings.bind(SETTINGS_NEW_INSTANCE_MODE_KEY, cbNewInstance, "active-id", GSettingsBindFlags.DEFAULT);
+        bNewInstance.add(cbNewInstance);
+        add(bNewInstance);
+
+        // *********** Paste Options
         Label lblPaste = new Label(format("<b>%s</b>", _("Paste")));
         lblPaste.setUseMarkup(true);
         lblPaste.setHalign(Align.START);
@@ -502,7 +509,8 @@ private:
         CheckButton cbStrip = new CheckButton(_("Strip first character of paste if comment or variable declaration"));
         gsSettings.bind(SETTINGS_STRIP_FIRST_COMMENT_CHAR_ON_PASTE_KEY, cbStrip, "active", GSettingsBindFlags.DEFAULT);
         add(cbStrip);
-
+        
+        // *********** Appearance Options
         Label lblAppearance = new Label(format("<b>%s</b>", _("Appearance")));
         lblAppearance.setUseMarkup(true);
         lblAppearance.setHalign(Align.START);
@@ -519,7 +527,13 @@ private:
         CheckButton cbSmallTitlebar = new CheckButton(_("Use small size for terminal titlebars"));
         gsSettings.bind(SETTINGS_ENABLE_SMALL_TITLE_KEY, cbSmallTitlebar, "active", GSettingsBindFlags.DEFAULT);
         add(cbSmallTitlebar);
-
+        
+        if (Version.checkVersion(3, 16, 0).length == 0) {
+            CheckButton cbWideHandle = new CheckButton(_("Use a wide handle for splitters"));
+            gsSettings.bind(SETTINGS_ENABLE_WIDE_HANDLE_KEY, cbWideHandle, "active", GSettingsBindFlags.DEFAULT);
+            add(cbWideHandle);
+        }
+        
         //Dark Theme
         Box b = new Box(Orientation.HORIZONTAL, 6);
         b.add(createLabel(_("Theme Variant")));

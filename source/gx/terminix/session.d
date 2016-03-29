@@ -13,6 +13,8 @@ import std.uuid;
 import gdk.Atom;
 import gdk.Event;
 
+import gio.Settings : GSettings = Settings;
+
 import glib.Util;
 
 import gtk.Application;
@@ -105,12 +107,20 @@ private:
     enum STACK_GROUP_NAME = "group";
     enum STACK_MAX_NAME = "maximized";
 
+    //A box in the stack used as the page where terminals reside 
     Box stackGroup;
+    //A box in the stack used to hold a maximized terminal
     Box stackMaximized;
+    //A box under stackGroup, used to hold the terminals and panes
     Box groupChild;
     MaximizedInfo maximizedInfo;
 
     Terminal lastFocused;
+
+    GSettings gsSettings;
+
+    immutable bool PANED_RESIZE_MODE = false;
+    immutable bool PANED_SHRINK_MODE = false;
 
     /**
      * Creates the session user interface
@@ -131,18 +141,19 @@ private:
         stackGroup = new Box(Orientation.VERTICAL, 0);
         addNamed(stackGroup, STACK_GROUP_NAME);
         stackMaximized = new Box(Orientation.VERTICAL, 0);
+        stackMaximized.getStyleContext().addClass("terminix-notebook-page");
         addNamed(stackMaximized, STACK_MAX_NAME);
         groupChild = new Box(Orientation.VERTICAL, 0);
-        // Fix transparency bugs on ubuntu where background-color 
+        // Fix transparency bugs on ubuntu and rawhide where background-color 
         // for widgets don't seem to take
         groupChild.getStyleContext().addClass("terminix-notebook-page");
         stackGroup.add(groupChild);
         // Need this to switch the stack in case we loaded a layout
         // with a maximized terminal since stack can't be switched until realized
-        addOnRealize(delegate(Widget widget) {
-           if (maximizedInfo.isMaximized) {
-               setVisibleChild(stackMaximized);
-           } 
+        addOnRealize(delegate(Widget) {
+            if (maximizedInfo.isMaximized) {
+                setVisibleChild(stackMaximized);
+            }
         });
     }
 
@@ -171,7 +182,7 @@ private:
     Paned createPaned(Orientation orientation) {
         Paned result = new Paned(orientation);
         if (Version.checkVersion(3, 16, 0).length == 0) {
-            result.setWideHandle(false);
+            result.setWideHandle(gsSettings.getBoolean(SETTINGS_ENABLE_WIDE_HANDLE_KEY));
         }
         return result;
     }
@@ -200,7 +211,7 @@ private:
         terminal.addOnTerminalRequestSplit(&onTerminalRequestSplit);
         terminal.addOnTerminalRequestMove(&onTerminalRequestMove);
         terminal.addOnTerminalInFocus(&onTerminalInFocus);
-        terminal.addOnTerminalKeyPress(&onTerminalKeyPress);
+        terminal.addOnTerminalSyncInput(&onTerminalSyncInput);
         terminal.addOnProcessNotification(&onTerminalProcessNotification);
         terminal.addOnIsActionAllowed(&onTerminalIsActionAllowed);
         terminal.addOnTerminalRequestStateChange(&onTerminalRequestStateChange);
@@ -216,7 +227,7 @@ private:
      */
     void removeTerminal(Terminal terminal) {
         int id = to!int(terminal.terminalID);
-        trace("Removing terminal from session");
+        trace("Removing terminal " ~ terminal.terminalUUID);
         if (lastFocused == terminal)
             lastFocused = null;
         //Remove delegates
@@ -225,7 +236,7 @@ private:
         terminal.removeOnTerminalRequestSplit(&onTerminalRequestSplit);
         terminal.removeOnTerminalRequestMove(&onTerminalRequestMove);
         terminal.removeOnTerminalInFocus(&onTerminalInFocus);
-        terminal.removeOnTerminalKeyPress(&onTerminalKeyPress);
+        terminal.removeOnTerminalSyncInput(&onTerminalSyncInput);
         terminal.removeOnProcessNotification(&onTerminalProcessNotification);
         terminal.removeOnIsActionAllowed(&onTerminalIsActionAllowed);
         terminal.removeOnTerminalRequestStateChange(&onTerminalRequestStateChange);
@@ -254,7 +265,7 @@ private:
         //Fix Issue #33
         if (id >= terminals.length)
             id = to!int(terminals.length);
-        if (id >= 0 && id < terminals.length) {
+        if (id > 0 && id <= terminals.length) {
             focusTerminal(id);
         }
         if (maximizedTerminal !is null) {
@@ -330,7 +341,7 @@ private:
                 return equal(box1, maximizedInfo.parent) ? box2 : box1;
             }
 
-            Widget widget1 = gx.gtk.util.getChildren(box1)[0];
+            Widget widget1 = gx.gtk.util.getChildren!(Widget)(box1, false)[0];
 
             Terminal terminal1 = cast(Terminal) widget1;
 
@@ -361,7 +372,7 @@ private:
         //Fixes segmentation fault where when added box we created another layer of Box which caused the cast
         //to Paned to fail
         //Get child widget, could be Terminal or Paned       
-        Widget widget = gx.gtk.util.getChildren(otherBox)[0];
+        Widget widget = gx.gtk.util.getChildren!(Widget)(otherBox, false)[0];
         //Remove widget from original Box parent
         otherBox.remove(widget);
         //Add widget to new parent
@@ -386,8 +397,8 @@ private:
         Box b2 = new Box(Orientation.VERTICAL, 0);
 
         Paned paned = createPaned(orientation);
-        paned.pack1(b1, true, true);
-        paned.pack2(b2, true, true);
+        paned.pack1(b1, PANED_RESIZE_MODE, PANED_SHRINK_MODE);
+        paned.pack2(b2, PANED_RESIZE_MODE, PANED_SHRINK_MODE);
 
         parent.remove(dest);
         parent.showAll();
@@ -509,18 +520,16 @@ private:
         lastFocused = terminal;
     }
 
-    void onTerminalKeyPress(Terminal originator, Event event) {
-        trace("Got key press");
-        Event newEvent = event.copy();
+    void onTerminalSyncInput(Terminal originator, SyncInputEvent event) {
+        trace("Got sync input event");
         foreach (terminal; terminals) {
             if (originator.getWidgetStruct() != terminal.getWidgetStruct() && terminal.synchronizeInput) {
-                trace("sending key press, sendEvent = " ~ to!string(event.key.sendEvent));
-                newEvent.key.sendEvent = 1;
-                terminal.echoKeyPressEvent(newEvent);
+                trace("sending sync event");
+                terminal.handleSyncInput(event);
             }
         }
     }
-    
+
     bool maximizeTerminal(Terminal terminal) {
         if (terminals.length == 1) {
             trace("Only one terminal in session, ignoring maximize request");
@@ -542,7 +551,7 @@ private:
         setVisibleChild(stackMaximized);
         return true;
     }
-    
+
     bool restoreTerminal(Terminal terminal) {
         if (!maximizedInfo.isMaximized) {
             error("Terminal is not maximized, ignoring");
@@ -571,7 +580,7 @@ private:
         if (state == TerminalState.MAXIMIZED) {
             result = maximizeTerminal(terminal);
         } else {
-            result = restoreTerminal(terminal); 
+            result = restoreTerminal(terminal);
         }
         terminal.focusTerminal();
         return result;
@@ -654,7 +663,7 @@ private:
          * Added to check for maximized state and grab right terminal
          */
         void serializeBox(string node, Box box) {
-            Widget[] widgets = gx.gtk.util.getChildren(box);
+            Widget[] widgets = gx.gtk.util.getChildren!(Widget)(box, false);
             if (widgets.length == 0 && maximizedInfo.isMaximized && equal(box, maximizedInfo.parent)) {
                 value.object[node] = serializeWidget(maximizedInfo.terminal, sizeInfo);
             } else {
@@ -714,10 +723,10 @@ private:
         string profileUUID = value[NODE_PROFILE].str();
         Terminal terminal = createTerminal(profileUUID);
         if (NODE_TITLE in value) {
-            terminal.overrideTitle = value[NODE_TITLE].str(); 
+            terminal.overrideTitle = value[NODE_TITLE].str();
         }
         if (NODE_OVERRIDE_CMD in value) {
-            terminal.overrideCommand = value[NODE_OVERRIDE_CMD].str(); 
+            terminal.overrideCommand = value[NODE_OVERRIDE_CMD].str();
         }
         terminal.initTerminal(value[NODE_DIRECTORY].str(), false);
         if (NODE_MAXIMIZED in value && value[NODE_MAXIMIZED].type == JSON_TYPE.TRUE) {
@@ -737,8 +746,8 @@ private:
         b1.add(parseNode(value[NODE_CHILD1], sizeInfo));
         Box b2 = new Box(Orientation.VERTICAL, 0);
         b2.add(parseNode(value[NODE_CHILD2], sizeInfo));
-        paned.pack1(b1, true, true);
-        paned.pack2(b2, true, true);
+        paned.pack1(b1, PANED_RESIZE_MODE, PANED_SHRINK_MODE);
+        paned.pack2(b2, PANED_RESIZE_MODE, PANED_SHRINK_MODE);
         // Fix for issue #49
         JSONValue position = value[NODE_SCALED_POSITION];
         double percent;
@@ -777,10 +786,29 @@ private:
      */
     this(string sessionName, Terminal terminal) {
         super();
+        initSession();
         _sessionUUID = randomUUID().toString();
         _name = sessionName;
         addTerminal(terminal);
         createUI(terminal);
+    }
+
+    void initSession() {
+        gsSettings = new GSettings(SETTINGS_ID);
+        gsSettings.addOnChanged(delegate(string key, GSettings) {
+            if (key == SETTINGS_ENABLE_WIDE_HANDLE_KEY) {
+                trace("Wide handle setting changed");
+                updateWideHandle(gsSettings.getBoolean(SETTINGS_ENABLE_WIDE_HANDLE_KEY));
+            }
+        });
+    }
+
+    void updateWideHandle(bool value) {
+        Paned[] all = gx.gtk.util.getChildren!(Paned)(stackGroup, true);
+        trace(format("Updating wide handle for %d paned", all.length));
+        foreach (paned; all) {
+            paned.setWideHandle(value);
+        }
     }
 
 public:
@@ -796,6 +824,7 @@ public:
      */
     this(string name, string profileUUID, string workingDir, bool firstRun) {
         super();
+        initSession();
         _sessionUUID = randomUUID().toString();
         _name = name;
         createUI(profileUUID, workingDir, firstRun);
@@ -814,6 +843,7 @@ public:
      */
     this(JSONValue value, string filename, int width, int height, bool firstRun) {
         super();
+        initSession();
         createBaseUI();
         _sessionUUID = randomUUID().toString();
         try {
@@ -834,6 +864,13 @@ public:
         return findTerminal(uuid);
     }
 
+    string getActiveTerminalUUID() {
+        if (lastFocused !is null)
+            return lastFocused.terminalUUID;
+        else
+            return null;
+    }
+
     /**
      * Serialize the session
      *
@@ -846,7 +883,7 @@ public:
         root.object[NODE_WIDTH] = JSONValue(getAllocatedWidth());
         root.object[NODE_HEIGHT] = JSONValue(getAllocatedHeight());
         SessionSizeInfo sizeInfo = SessionSizeInfo(getAllocatedWidth(), getAllocatedHeight());
-        root.object[NODE_CHILD] = serializeWidget(gx.gtk.util.getChildren(groupChild)[0], sizeInfo);
+        root.object[NODE_CHILD] = serializeWidget(gx.gtk.util.getChildren!(Widget)(groupChild, false)[0], sizeInfo);
         root[NODE_TYPE] = WidgetType.SESSION;
         return root;
     }
@@ -905,11 +942,11 @@ public:
             terminal.synchronizeInput = value;
         }
     }
-    
+
     /**
      * Used to support re-parenting to enable a thumbnail
      * image to be drawn off screen
-     */ 
+     */
     @property Widget drawable() {
         if (maximizedInfo.isMaximized) {
             return maximizedInfo.terminal;
@@ -927,6 +964,35 @@ public:
                 return true;
         }
         return false;
+    }
+
+    /**
+     * Resize terminal based on direction
+     */
+    void resizeTerminal(string direction) {
+        Terminal terminal = lastFocused;
+        if (terminal !is null) {
+            Container parent = cast(Container) terminal;
+            int increment = 10;
+            if (direction == "up" || direction == "left")
+                increment = -increment;
+            while (parent !is null) {
+                Paned paned = cast(Paned) parent;
+                trace("Testing Paned");
+                if (paned !is null) {
+                    if ((direction == "up" || direction == "down") && paned.getOrientation() == Orientation.VERTICAL) {
+                        trace("Resizing " ~ direction);
+                        paned.setPosition(paned.getPosition() + increment);
+                        return;
+                    } else if ((direction == "left" || direction == "right") && paned.getOrientation() == Orientation.HORIZONTAL) {
+                        trace("Resizing " ~ direction);
+                        paned.setPosition(paned.getPosition() + increment);
+                        return;
+                    }
+                }
+                parent = cast(Container) parent.getParent();
+            }
+        }
     }
 
     /**
@@ -968,12 +1034,70 @@ public:
     }
 
     /**
+     * Focus terminal in the session by direction
+     */
+    void focusDirection(string direction) {
+        trace("Focusing ", direction);
+
+        Widget appWindow = lastFocused.getToplevel();
+        GtkAllocation appWindowAllocation;
+        appWindow.getClip(appWindowAllocation);
+
+        // Start at the top left of the current terminal
+        int xPos, yPos;
+        lastFocused.translateCoordinates(appWindow, 0, 0, xPos, yPos);
+
+        // While still in the application window, move 20 pixels per loop
+        while (xPos >= 0 && xPos < appWindowAllocation.width && yPos >= 0 && yPos < appWindowAllocation.height) {
+            switch (direction) {
+            case "up":
+                yPos -= 20;
+                break;
+            case "down":
+                yPos += 20;
+                break;
+            case "left":
+                xPos -= 20;
+                break;
+            case "right":
+                xPos += 20;
+                break;
+            default:
+                break;
+            }
+
+            // If the x/y position lands in another terminal, focus it
+            foreach (terminal; terminals) {
+                if (terminal == lastFocused)
+                    continue;
+
+                int termX, termY;
+                terminal.translateCoordinates(appWindow, 0, 0, termX, termY);
+
+                GtkAllocation termAllocation;
+                terminal.getClip(termAllocation);
+
+                if (xPos >= termX && yPos >= termY && xPos <= (termX + termAllocation.width) && yPos <= (termY + termAllocation.height)) {
+                    focusTerminal(terminal);
+                    return;
+                }
+            }
+        }
+    }
+
+    bool focusTerminal(Terminal terminal) {
+        if (maximizedInfo.isMaximized && maximizedInfo.terminal != terminal)
+            return false;
+        terminal.focusTerminal();
+        return true;
+    }
+
+    /**
      * Focus the terminal designated by the ID
      */
     bool focusTerminal(ulong terminalID) {
         if (terminalID > 0 && terminalID <= terminals.length) {
-            terminals[terminalID - 1].focusTerminal();
-            return true;
+            return focusTerminal(terminals[terminalID - 1]);
         }
         return false;
     }
@@ -984,8 +1108,7 @@ public:
     bool focusTerminal(string terminalUUID) {
         foreach (terminal; terminals) {
             if (terminal.terminalUUID == terminalUUID) {
-                terminal.focusTerminal();
-                return true;
+                return focusTerminal(terminal);
             }
         }
         return false;

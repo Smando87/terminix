@@ -62,9 +62,12 @@ private:
     }
 
     bool onButtonPress(Event event, Widget w) {
+        trace("** Sidebar button press");
         //If button press happened outside of sidebar close it
-        if (event.getWindow().getWindowStruct() != getWindow().getWindowStruct() && event.getWindow().getWindowStruct() != lbSessions.getWindow().getWindowStruct()) {
-            notifySessionSelected(null);
+        if (event.getWindow() !is null && lbSessions.getWindow() !is null) { 
+            if (event.getWindow().getWindowStruct() != getWindow().getWindowStruct() && event.getWindow().getWindowStruct() != lbSessions.getWindow().getWindowStruct()) {
+                notifySessionSelected(null);
+            }
         }
         return false;
     }
@@ -89,6 +92,7 @@ public:
         super();
         addOnButtonPress(&onButtonPress);
         addOnKeyRelease(&onKeyRelease);
+        
         setTransitionType(RevealerTransitionType.SLIDE_RIGHT);
         setHexpand(false);
         setVexpand(true);
@@ -100,11 +104,20 @@ public:
         lbSessions.setSelectionMode(SelectionMode.BROWSE);
         lbSessions.getStyleContext().addClass("notebook");
         lbSessions.getStyleContext().addClass("header");
+        lbSessions.getStyleContext().addClass("terminix-session-sidebar");
         lbSessions.addOnRowActivated(&onRowActivated);
 
         ScrolledWindow sw = new ScrolledWindow(lbSessions);
         sw.setPolicy(PolicyType.NEVER, PolicyType.AUTOMATIC);
         sw.setShadowType(ShadowType.IN);
+
+        sw.addOnUnmap(delegate(Widget) {
+           if (hasGrab()) {
+                grabRemove();
+                trace("** Unmapped, Removing Sidebar Grab");
+           }
+            hide();            
+        });
 
         add(sw);
     }
@@ -114,7 +127,9 @@ public:
         AspectFrame wrapWidget(Widget widget, string cssClass) {
             AspectFrame af = new AspectFrame(null, 0.5, 0.5, 1.0, false);
             af.setShadowType(ShadowType.NONE);
-            af.getStyleContext().addClass(cssClass);
+            if (cssClass.length > 0) {
+                af.getStyleContext().addClass(cssClass);
+            }
             af.add(widget);
             return af;
         }
@@ -153,7 +168,19 @@ public:
                 AspectFrame af = wrapWidget(ev, "terminix-notification-count");
                 ev.setTooltipText(tooltip);
                 b.packStart(af, false, false, 4);
+            } else {
+                //Add placeholder to keep things aligned
+                Label lblTemp = new Label("");
+                lblTemp.setWidthChars(2);
+                AspectFrame af = wrapWidget(lblTemp, null);
+                b.packStart(af, false, false, 4);
             }
+            
+            Label lblName = new Label(session.name);
+            lblName.setEllipsize(PangoEllipsizeMode.END);
+            lblName.setSensitive(false);
+            lblName.getStyleContext().addClass("terminix-session-name");
+            b.packStart(lblName, true, false, 4);
 
             Label lblIndex = new Label(format("%d", (i+1)));
             setAllMargins(lblIndex, 4);
@@ -174,13 +201,19 @@ public:
     override void setRevealChild(bool revealChild) {
         super.setRevealChild(revealChild);
         if (revealChild) {
-            trace("Show sidebar");
-            grabAdd();
+            trace("** Show sidebar");
+            if (!hasGrab()) {
+                grabAdd();
+                trace("** Getting Sidebar Grab");
+            }
+            lbSessions.getSelectedRow().grabFocus();
         } else {
-            trace("Hide sidebar");
-            grabRemove();
+            trace("** Hide sidebar");
+            if (hasGrab()) {
+                grabRemove();
+                trace("** Removing Sidebar Grab");
+            }
         }
-        lbSessions.getSelectedRow().grabFocus();
     }
 
     void addOnSessionSelected(OnSessionSelected dlg) {

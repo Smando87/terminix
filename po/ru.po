@@ -1,743 +1,729 @@
-# Terminix zh_CN translation
-# Jeff Bai <jeffbai@aosc.xyz>, 2016.
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Terminix 20160222\n"
+"Project-Id-Version: terminix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-27 19:25-0400\n"
-"PO-Revision-Date: \n"
-"Last-Translator: Jeff Bai <jeffbai@aosc.xyz>\n"
-"Language-Team: AOSC zh_CN <aosc@member.fsf.org>\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2016-03-22 15:34+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "terminal"
-msgstr "终端"
+msgstr "терминал"
 
 msgid "title"
-msgstr "标题"
+msgstr "заголовок"
 
-# *****************************************
-# Keyboard shortcut categories
-# *****************************************
 msgid "app"
-msgstr "应用程序"
+msgstr "приложение"
 
 msgid "new-window"
-msgstr "新建窗口"
+msgstr "новое-окно"
 
 msgid "new-session"
-msgstr "新建会话"
+msgstr "новый-сеанс"
 
 msgid "preferences"
-msgstr "首选项"
+msgstr "параметры"
 
 #, fuzzy
 msgid "shortcuts"
-msgstr "快捷键"
+msgstr "Горячие клавиши"
 
 msgid "session"
-msgstr "会话"
+msgstr "сеанс"
 
 msgid "synchronize-input"
-msgstr "同步输入"
+msgstr "синхронный вывод"
 
 msgid "close"
-msgstr "关闭"
+msgstr "закрыть"
 
 msgid "name"
-msgstr "名称"
+msgstr "имя"
 
 msgid "load"
-msgstr "载入"
+msgstr "загрузить"
 
 msgid "save"
-msgstr "保存"
+msgstr "сохранить"
 
 msgid "save-as"
-msgstr "另存为"
+msgstr "сохранить как"
 
 msgid "switch-to-terminal-0"
-msgstr "切换到终端 10"
+msgstr "на-терминал-0"
 
 msgid "switch-to-terminal-1"
-msgstr "切换到终端 1"
+msgstr "на-терминал-1"
 
 msgid "switch-to-terminal-2"
-msgstr "切换到终端 2"
+msgstr "на-терминал-2"
 
 msgid "switch-to-terminal-3"
-msgstr "切换到终端 3"
+msgstr "на-терминал-3"
 
 msgid "switch-to-terminal-4"
-msgstr "切换到终端 4"
+msgstr "на-терминал-4"
 
 msgid "switch-to-terminal-5"
-msgstr "切换到终端 5"
+msgstr "на-терминал-5"
 
 msgid "switch-to-terminal-6"
-msgstr "切换到终端 6"
+msgstr "на-терминал-6"
 
 msgid "switch-to-terminal-7"
-msgstr "切换到终端 7"
+msgstr "на-терминал-7"
 
 msgid "switch-to-terminal-8"
-msgstr "切换到终端 8"
+msgstr "на-терминал-8"
 
 msgid "switch-to-terminal-9"
-msgstr "切换到终端 9"
+msgstr "на-терминал-9"
 
-#, fuzzy
 msgid "switch-to-terminal-up"
-msgstr "切换到终端 10"
+msgstr "на-терминал-вверх"
 
-#, fuzzy
 msgid "switch-to-terminal-down"
-msgstr "切换到终端 10"
+msgstr "на-терминал-вниз"
 
-#, fuzzy
 msgid "switch-to-terminal-left"
-msgstr "切换到终端 10"
+msgstr "на-терминал-влево"
 
-#, fuzzy
 msgid "switch-to-terminal-right"
-msgstr "切换到终端 10"
+msgstr "на-терминал-направо"
 
 #, fuzzy
 msgid "resize-terminal-up"
-msgstr "切换到终端 10"
+msgstr "на-терминал-вверх"
 
 #, fuzzy
 msgid "resize-terminal-down"
-msgstr "切换到终端 10"
+msgstr "на-терминал-вниз"
 
 #, fuzzy
 msgid "resize-terminal-left"
-msgstr "切换到终端 10"
+msgstr "на-терминал-влево"
 
 #, fuzzy
 msgid "resize-terminal-right"
-msgstr "切换到终端 10"
+msgstr "на-терминал-направо"
 
 msgid "win"
-msgstr "win"
+msgstr "окно"
 
 msgid "view-sidebar"
-msgstr "显示侧边栏"
+msgstr "показать-боковую-панель"
 
 msgid "switch-to-session-0"
-msgstr "切换到会话 10"
+msgstr "на-сеанс-0"
 
 msgid "switch-to-session-1"
-msgstr "切换到会话 1"
+msgstr "на-сеанс-1"
 
 msgid "switch-to-session-2"
-msgstr "切换到会话 2"
+msgstr "на-сеанс-2"
 
 msgid "switch-to-session-3"
-msgstr "切换到会话 3"
+msgstr "на-сеанс-3"
 
 msgid "switch-to-session-4"
-msgstr "切换到会话 4"
+msgstr "на-сеанс-4"
 
 msgid "switch-to-session-5"
-msgstr "切换到会话 5"
+msgstr "на-сеанс-5"
 
 msgid "switch-to-session-6"
-msgstr "切换到会话 6"
+msgstr "на-сеанс-6"
 
 msgid "switch-to-session-7"
-msgstr "切换到会话 7"
+msgstr "на-сеанс-7"
 
 msgid "switch-to-session-8"
-msgstr "切换到会话 8"
+msgstr "на-сеанс-8"
 
 msgid "switch-to-session-9"
-msgstr "切换到会话 9"
+msgstr "на-сеанс-9"
 
-#, fuzzy
 msgid "switch-to-next-session"
-msgstr "切换到会话 10"
+msgstr "на следующий сеанс"
 
-#, fuzzy
 msgid "switch-to-previous-session"
-msgstr "切换到上一个终端"
+msgstr "на предыдущий сеанс"
 
 msgid "fullscreen"
-msgstr "全屏"
+msgstr "весь экран"
 
 msgid "switch-to-next-terminal"
-msgstr "切换到下一个终端"
+msgstr "на-следующий-терминал"
 
 msgid "switch-to-previous-terminal"
-msgstr "切换到上一个终端"
+msgstr "на-предыдущий-терминал"
 
 msgid "split-horizontal"
-msgstr "水平分割"
+msgstr "разделить горизонтально"
 
 msgid "split-vertical"
-msgstr "垂直分割"
+msgstr "разделить вертикально"
 
 msgid "find"
-msgstr "查找"
+msgstr "найти"
 
 msgid "find-next"
-msgstr "查找下一个"
+msgstr "найти-следующий"
 
-# ***********************************************
-# Keyboard shortcuts to the end, these are shown
-# in the Shortcut preferences and in the future
-# the shortcut overview if available in Gnome 3.20
-# ***********************************************
 msgid "find-previous"
-msgstr "查找上一个"
+msgstr "найти-предыдущий"
 
 msgid "layout"
-msgstr "布局"
+msgstr "ориентация"
 
 msgid "maximize"
-msgstr "最大化"
+msgstr "развернуть"
 
 msgid "profile-preference"
-msgstr "配置方案首选项"
+msgstr "параметры профиля"
 
 msgid "read-only"
-msgstr "只读"
+msgstr "для чтения"
 
 msgid "copy"
-msgstr "复制"
+msgstr "копировать"
 
 msgid "paste"
-msgstr "粘贴"
+msgstr "вставить"
 
 msgid "select-all"
-msgstr "全选"
+msgstr "выделить всё"
 
 msgid "zoom-in"
-msgstr "放大"
+msgstr "приблизить"
 
 msgid "zoom-out"
-msgstr "缩小"
+msgstr "отдалить"
 
 msgid "zoom-normal"
-msgstr "正常缩放"
+msgstr "норма"
 
 #: source/gx/terminix/colorschemes.d:107
 #, c-format
 msgid "File %s is not a color scheme compliant JSON file"
-msgstr "文件 %s 不是兼容的 JSON 颜色主题文件"
+msgstr ""
 
 #: source/gx/terminix/colorschemes.d:140
 msgid "Color scheme palette requires 16 colors"
-msgstr "颜色主题色板需要 16 个颜色"
+msgstr "Палитре цветовой схемы нужно 16 цветов"
 
 #: source/gx/terminix/profilewindow.d:64
 #, c-format
 msgid "Editing Profile: %s"
-msgstr "正在编辑配置方案：%s"
+msgstr "Изменение профиля %s"
 
 #: source/gx/terminix/profilewindow.d:66
 msgid "New Profile"
-msgstr "新建配置方案"
+msgstr "Новый профиль"
 
 #: source/gx/terminix/profilewindow.d:74
 msgid "General"
-msgstr "常规"
+msgstr "Основное"
 
 #: source/gx/terminix/profilewindow.d:75 source/gx/terminix/profilewindow.d:630
 #: source/gx/terminix/terminal/layout.d:64
 msgid "Command"
-msgstr "命令"
+msgstr "Команда"
 
 #: source/gx/terminix/profilewindow.d:76
 msgid "Color"
-msgstr "颜色"
+msgstr "Цвет"
 
 #: source/gx/terminix/profilewindow.d:77
 msgid "Scrolling"
-msgstr "滚动"
+msgstr "Прокрутка"
 
 #: source/gx/terminix/profilewindow.d:78
 msgid "Compatibility"
-msgstr "兼容性"
+msgstr "Совместимость"
 
 #: source/gx/terminix/profilewindow.d:127
 msgid "Profile Name"
-msgstr "配置方案名称"
+msgstr "Название профиля"
 
 #: source/gx/terminix/profilewindow.d:135
 #, c-format
 msgid "ID: %s"
-msgstr "ID：%s"
+msgstr ""
 
 #: source/gx/terminix/profilewindow.d:142
 msgid "Terminal Size"
-msgstr "终端大小"
+msgstr "Размер терминала"
 
 #: source/gx/terminix/profilewindow.d:152
 msgid "columns"
-msgstr "列"
+msgstr "колонки"
 
 #: source/gx/terminix/profilewindow.d:158
 msgid "rows"
-msgstr "行"
+msgstr "строки"
 
 #: source/gx/terminix/profilewindow.d:163
 msgid "Reset"
-msgstr "重置"
+msgstr "Сброс"
 
 #: source/gx/terminix/profilewindow.d:169
 msgid "Cursor"
-msgstr "光标"
+msgstr "Курсор"
 
 #: source/gx/terminix/profilewindow.d:172
 msgid "Block"
-msgstr "方块"
+msgstr "Блок"
 
 #: source/gx/terminix/profilewindow.d:172
 msgid "IBeam"
-msgstr "IBeam"
+msgstr ""
 
 #: source/gx/terminix/profilewindow.d:172
 msgid "Underline"
-msgstr "下划线"
+msgstr "Подчеркивание"
 
 #: source/gx/terminix/profilewindow.d:179
 msgid "Blink Mode"
-msgstr "闪烁模式"
+msgstr "Режим мерцания"
 
 #: source/gx/terminix/profilewindow.d:182
 msgid "System"
-msgstr "系统"
+msgstr "Система"
 
 #: source/gx/terminix/profilewindow.d:182
 msgid "On"
-msgstr "开启"
+msgstr "Вкл"
 
 #: source/gx/terminix/profilewindow.d:182
 msgid "Off"
-msgstr "关闭"
+msgstr "Выкд"
 
 #: source/gx/terminix/profilewindow.d:188
 msgid "Terminal Bell"
-msgstr "终端响铃"
+msgstr "Сигнал терминала"
 
 #: source/gx/terminix/profilewindow.d:198
 msgid "Terminal Title"
-msgstr "终端标题"
+msgstr "Заголовок терминала"
 
 #: source/gx/terminix/profilewindow.d:211
 msgid "Text Appearance"
-msgstr "文本外观"
+msgstr "Оформление текста"
 
 #: source/gx/terminix/profilewindow.d:217
 msgid "Allow bold text"
-msgstr "允许粗体"
+msgstr "Разрешить жирный текст"
 
 #: source/gx/terminix/profilewindow.d:222
 msgid "Rewrap on resize"
-msgstr "缩放时重新换行"
+msgstr "Реформат при изменении размера"
 
 #: source/gx/terminix/profilewindow.d:228
 msgid "Custom Font"
-msgstr "自定义字体"
+msgstr "Пользовательский шрифт"
 
 #: source/gx/terminix/profilewindow.d:234
 msgid "Choose A Terminal Font"
-msgstr "选择终端字体"
+msgstr "Сменить шрифт терминала"
 
 #: source/gx/terminix/profilewindow.d:286
 msgid "Color scheme"
-msgstr "配色方案"
+msgstr "Схема цветов"
 
 #: source/gx/terminix/profilewindow.d:296
 msgid "Custom"
-msgstr "自定义"
+msgstr "Пользовательская"
 
 #: source/gx/terminix/profilewindow.d:307
 msgid "Color palette"
-msgstr "调色板"
+msgstr "Палитра"
 
 #: source/gx/terminix/profilewindow.d:315
 msgid "Options"
-msgstr "选项"
+msgstr "Настройки"
 
 #: source/gx/terminix/profilewindow.d:323
 msgid "Use theme colors for foreground/background"
-msgstr "为前景/背景色使用主题颜色"
+msgstr "Использовать цвета темы"
 
 #: source/gx/terminix/profilewindow.d:333
 msgid "Transparency"
-msgstr "透明度"
+msgstr "Прозрачность"
 
 #: source/gx/terminix/profilewindow.d:357
 msgid "Select Background Color"
-msgstr "选择背景色"
+msgstr "Выбрать цвет фона"
 
 #: source/gx/terminix/profilewindow.d:365
 msgid "Background"
-msgstr "背景"
+msgstr "Фон"
 
 #: source/gx/terminix/profilewindow.d:370
 #: source/gx/terminix/profilewindow.d:384
 msgid "Select Foreground Color"
-msgstr "选择前景色"
+msgstr "Выбрать цвет"
 
 #: source/gx/terminix/profilewindow.d:383
 msgid "Foreground"
-msgstr "前景"
+msgstr "Цвет"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Black"
-msgstr "黑色"
+msgstr "Черный"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Red"
-msgstr "红色"
+msgstr "Красный"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Green"
-msgstr "绿色"
+msgstr "Зеленый"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Orange"
-msgstr "橙色"
+msgstr "Оранжевый"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Blue"
-msgstr "蓝色"
+msgstr "Синий"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Purple"
-msgstr "紫色"
+msgstr "Пурпурный"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Turquoise"
-msgstr "绿松色"
+msgstr "Бирюзовый"
 
 #: source/gx/terminix/profilewindow.d:388
 msgid "Grey"
-msgstr "灰"
+msgstr "Серый"
 
 #: source/gx/terminix/profilewindow.d:394
 #, c-format
 msgid "Select %s Color"
-msgstr "选择 %s 个颜色"
+msgstr "Выбрать %s цвет"
 
 #: source/gx/terminix/profilewindow.d:401
 #, c-format
 msgid "Select %s Light Color"
-msgstr "选择 %s 个淡色"
+msgstr "Выбрать светло-%s цвет"
 
 #: source/gx/terminix/profilewindow.d:507
 msgid "Show scrollbar"
-msgstr "显示滚动条"
+msgstr "Показать полосу прокрутки"
 
 #: source/gx/terminix/profilewindow.d:511
 msgid "Scroll on output"
-msgstr "输出时滚动"
+msgstr "Прокрутка при выводе"
 
 #: source/gx/terminix/profilewindow.d:515
 msgid "Scroll on keystroke"
-msgstr "击键时滚动"
+msgstr "Прокрутка при нажатии"
 
 #: source/gx/terminix/profilewindow.d:519
 msgid "Limit scrollback to:"
-msgstr "回滚限制："
+msgstr "Предел прокрутки назад:"
 
 #: source/gx/terminix/profilewindow.d:560
 msgid "Backspace key generates"
-msgstr "按 Backspace 键产生"
+msgstr "Вызывать backspace"
 
 #: source/gx/terminix/profilewindow.d:563
 #: source/gx/terminix/profilewindow.d:571
 msgid "Automatic"
-msgstr "自动"
+msgstr "Автоматически"
 
 #: source/gx/terminix/profilewindow.d:563
 #: source/gx/terminix/profilewindow.d:571
 msgid "Control-H"
-msgstr "Control-H"
+msgstr ""
 
 #: source/gx/terminix/profilewindow.d:563
 #: source/gx/terminix/profilewindow.d:571
 msgid "ASCII DEL"
-msgstr "ASCII DEL"
+msgstr ""
 
 #: source/gx/terminix/profilewindow.d:563
 #: source/gx/terminix/profilewindow.d:571
 msgid "Escape sequence"
-msgstr "转义序列"
+msgstr "Esc-последовательность"
 
 #: source/gx/terminix/profilewindow.d:563
 #: source/gx/terminix/profilewindow.d:571
 msgid "TTY"
-msgstr "TTY"
+msgstr ""
 
 #: source/gx/terminix/profilewindow.d:568
 msgid "Delete key generates"
-msgstr "按 Delete 键产生"
+msgstr "Вызывать Del"
 
 #: source/gx/terminix/profilewindow.d:576 source/gx/terminix/prefwindow.d:86
 #: source/gx/terminix/prefwindow.d:159
 #: source/gx/terminix/terminal/terminal.d:601
 msgid "Encoding"
-msgstr "编码"
+msgstr "Кодировка"
 
 #: source/gx/terminix/profilewindow.d:591
 msgid "Ambiguous-width characters"
-msgstr "模糊宽度字符"
+msgstr "Символы переменной ширины"
 
 #: source/gx/terminix/profilewindow.d:594
 msgid "Narrow"
-msgstr "窄"
+msgstr "Узкие"
 
 #: source/gx/terminix/profilewindow.d:594
 msgid "Wide"
-msgstr "宽"
+msgstr "Широкие"
 
 #: source/gx/terminix/profilewindow.d:620
 msgid "Run command as a login shell"
-msgstr "运行作为登录程序的命令"
+msgstr "Выполнить команду как вход в оболочку"
 
 #: source/gx/terminix/profilewindow.d:624
 msgid "Run a custom command instead of my shell"
-msgstr "运行自定义命令而不是我的命令行外壳"
+msgstr "Пользовательская команда вместо встроенной  оболочки"
 
 #: source/gx/terminix/profilewindow.d:640
 msgid "When command exits"
-msgstr "命令退出时"
+msgstr "При завершении команды"
 
 #: source/gx/terminix/profilewindow.d:642
 msgid "Exit the terminal"
-msgstr "退出终端"
+msgstr "Выход их терминала"
 
 #: source/gx/terminix/profilewindow.d:642
 msgid "Restart the command"
-msgstr "重启命令"
+msgstr "Перезапуск команды"
 
 #: source/gx/terminix/profilewindow.d:642
 msgid "Hold the terminal open"
-msgstr "保持终端开启"
+msgstr "Держать терминал открытым"
 
 #: source/gx/terminix/encoding.d:18 source/gx/terminix/encoding.d:31
 #: source/gx/terminix/encoding.d:45 source/gx/terminix/encoding.d:67
 #: source/gx/terminix/encoding.d:78
 msgid "Western"
-msgstr "西方"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:19 source/gx/terminix/encoding.d:46
 #: source/gx/terminix/encoding.d:57 source/gx/terminix/encoding.d:76
 msgid "Central European"
-msgstr "中欧"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:20
 msgid "South European"
-msgstr "南欧"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:21 source/gx/terminix/encoding.d:29
 #: source/gx/terminix/encoding.d:83
 msgid "Baltic"
-msgstr "波罗的语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:22 source/gx/terminix/encoding.d:47
 #: source/gx/terminix/encoding.d:53 source/gx/terminix/encoding.d:54
 #: source/gx/terminix/encoding.d:59 source/gx/terminix/encoding.d:77
 msgid "Cyrillic"
-msgstr "西里尔语"
+msgstr ""
 
-# ************************************************
-# Encodings
-# ************************************************
 #: source/gx/terminix/encoding.d:23 source/gx/terminix/encoding.d:50
 #: source/gx/terminix/encoding.d:56 source/gx/terminix/encoding.d:82
 msgid "Arabic"
-msgstr "阿拉伯语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:24 source/gx/terminix/encoding.d:62
 #: source/gx/terminix/encoding.d:79
 msgid "Greek"
-msgstr "希腊语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:25
 msgid "Hebrew Visual"
-msgstr "希伯来语（视觉排布）"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:26 source/gx/terminix/encoding.d:49
 #: source/gx/terminix/encoding.d:65 source/gx/terminix/encoding.d:81
 msgid "Hebrew"
-msgstr "希伯来语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:27 source/gx/terminix/encoding.d:48
 #: source/gx/terminix/encoding.d:69 source/gx/terminix/encoding.d:80
 msgid "Turkish"
-msgstr "土耳其语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:28
 msgid "Nordic"
-msgstr "北欧语言"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:30
 msgid "Celtic"
-msgstr "凯尔特语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:32 source/gx/terminix/encoding.d:68
 msgid "Romanian"
-msgstr "罗马尼亚语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:33
 msgid "Unicode"
-msgstr "Unicode"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:34
 msgid "Armenian"
-msgstr "亚美尼亚语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:35 source/gx/terminix/encoding.d:36
 #: source/gx/terminix/encoding.d:40
 msgid "Chinese Traditional"
-msgstr "繁体中文"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:37
 msgid "Cyrillic/Russian"
-msgstr "西里尔语/俄语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:38 source/gx/terminix/encoding.d:51
 #: source/gx/terminix/encoding.d:71
 msgid "Japanese"
-msgstr "日语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:39 source/gx/terminix/encoding.d:52
 #: source/gx/terminix/encoding.d:74
 msgid "Korean"
-msgstr "韩语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:41 source/gx/terminix/encoding.d:42
 #: source/gx/terminix/encoding.d:43
 msgid "Chinese Simplified"
-msgstr "简体中文"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:44
 msgid "Georgian"
-msgstr "格鲁吉亚语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:55 source/gx/terminix/encoding.d:70
 msgid "Cyrillic/Ukrainian"
-msgstr "西里尔语/乌克兰语"
+msgstr "Русский/Украинский"
 
 #: source/gx/terminix/encoding.d:58
 msgid "Croatian"
-msgstr "克罗地亚语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:60
 msgid "Hindi"
-msgstr "印地语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:61
 msgid "Persian"
-msgstr "波斯"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:63
 msgid "Gujarati"
-msgstr "古吉拉特文 "
+msgstr ""
 
 #: source/gx/terminix/encoding.d:64
 msgid "Gurmukhi"
-msgstr "古木基文"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:66
 msgid "Icelandic"
-msgstr "冰岛语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:72 source/gx/terminix/encoding.d:75
 #: source/gx/terminix/encoding.d:84
 msgid "Vietnamese"
-msgstr "越南语"
+msgstr ""
 
 #: source/gx/terminix/encoding.d:73
 msgid "Thai"
-msgstr "泰语"
+msgstr ""
 
 #: source/gx/terminix/application.d:147 source/gx/terminix/session.d:1188
 #: source/gx/terminix/prefwindow.d:492
 msgid "New Session"
-msgstr "新建会话"
+msgstr "Новый сеанс"
 
 #: source/gx/terminix/application.d:148 source/gx/terminix/prefwindow.d:492
 msgid "New Window"
-msgstr "新建窗口"
+msgstr "Новое окно"
 
 #: source/gx/terminix/application.d:152 source/gx/terminix/prefwindow.d:70
 msgid "Preferences"
-msgstr "首选项"
+msgstr "Параметры"
 
 #: source/gx/terminix/application.d:154 source/gx/terminix/prefwindow.d:80
 msgid "Shortcuts"
-msgstr "快捷键"
+msgstr "Горячие клавиши"
 
 #: source/gx/terminix/application.d:159
 msgid "About"
-msgstr "关于"
+msgstr "О программе"
 
 #: source/gx/terminix/application.d:160
 msgid "Quit"
-msgstr "退出"
+msgstr "Выход"
 
 #: source/gx/terminix/application.d:204
 msgid "Credits"
-msgstr "感谢名单"
+msgstr ""
 
 #: source/gx/terminix/application.d:393
 msgid "Set the working directory of the terminal"
-msgstr "设置终端的工作目录"
+msgstr "Установить рабочую папку терминала"
 
 #: source/gx/terminix/application.d:393
 msgid "DIRECTORY"
-msgstr "DIRECTORY"
+msgstr ""
 
 #: source/gx/terminix/application.d:394
 msgid "Set the starting profile"
-msgstr "设置启动配置文件"
+msgstr "Установить стартовый профиль"
 
 #: source/gx/terminix/application.d:394
 msgid "PROFILE_NAME"
-msgstr "PROFILE_NAME"
+msgstr ""
 
 #: source/gx/terminix/application.d:395
 msgid "Open the specified session"
-msgstr "打开指定的会话"
+msgstr "Открыть специальную сессию"
 
 #: source/gx/terminix/application.d:395
 msgid "SESSION_NAME"
-msgstr "SESSION_NAME"
+msgstr ""
 
 #: source/gx/terminix/application.d:396
 msgid "Send an action to current Terminix instance"
-msgstr "向当前 Terminix 实例发送动作"
+msgstr ""
 
 #: source/gx/terminix/application.d:396
 msgid "ACTION_NAME"
-msgstr "ACTION_NAME"
+msgstr ""
 
 #: source/gx/terminix/application.d:397
 msgid "Execute the passed command"
-msgstr "执行传入的命令"
+msgstr ""
 
 #: source/gx/terminix/application.d:397
 msgid "EXECUTE"
-msgstr "EXECUTE"
+msgstr ""
 
 #: source/gx/terminix/application.d:398
 msgid "Hidden argument to pass terminal UUID"
-msgstr "传入终端 UUID 的隐藏参数"
+msgstr ""
 
 #: source/gx/terminix/application.d:398
 msgid "TERMINAL_UUID"
-msgstr "TERMINAL_UUID"
+msgstr ""
 
 #: source/gx/terminix/application.d:538
 msgid ""
@@ -745,94 +731,92 @@ msgid ""
 "This issue is not serious, but correcting it will improve your experience.\n"
 "Click the link below for more information:"
 msgstr ""
-"终端配置似乎存在问题。这并不是严重问题，但是更正这些问题将改善你的使用体验。"
-"点击如下链接以获取更多信息："
 
 #: source/gx/terminix/application.d:539
 msgid "Configuration Issue Detected"
-msgstr "检测到配置问题"
+msgstr "Найдена ошибка конфигурации"
 
 #: source/gx/terminix/application.d:551
 msgid "Do not show this message again"
-msgstr "不再显示该信息"
+msgstr "Больше не показывать это сообщение"
 
 #: source/gx/terminix/session.d:450
 msgid "Could not locate dropped terminal"
-msgstr "无法定位放置的终端"
+msgstr "Выпадающий терминал не найден"
 
 #: source/gx/terminix/session.d:455
 msgid "Could not locate session for dropped terminal"
-msgstr "无法定位放置的终端的会话"
+msgstr "Сеанс выпадающего терминала не найден"
 
 #: source/gx/terminix/session.d:1154
 msgid "Name"
-msgstr "名称"
+msgstr "Имя"
 
 #: source/gx/terminix/session.d:1165 source/gx/terminix/prefwindow.d:326
 msgid "Profile"
-msgstr "配置方案"
+msgstr "Профиль"
 
 #: source/gx/terminix/prefwindow.d:77
 msgid "Global"
-msgstr "全局"
+msgstr "Основные"
 
 #: source/gx/terminix/prefwindow.d:83
 #: source/gx/terminix/terminal/terminal.d:600
 msgid "Profiles"
-msgstr "配置方案"
+msgstr "Профили"
 
 #: source/gx/terminix/prefwindow.d:121
 msgid "Encodings showing in menu:"
-msgstr "菜单中显示的编码："
+msgstr "Показывать кодировки в меню:"
 
 #: source/gx/terminix/prefwindow.d:157
 msgid "Enabled"
-msgstr "已启用"
+msgstr "Включено"
 
 #: source/gx/terminix/prefwindow.d:208
 msgid "Action"
-msgstr "动作"
+msgstr "Действия"
 
 #: source/gx/terminix/prefwindow.d:235
 msgid "Shortcut Key"
-msgstr "快捷键"
+msgstr "Горячие клавиши"
 
 #: source/gx/terminix/prefwindow.d:324 source/gx/terminix/prefwindow.d:543
 #: source/gx/terminix/appwindow.d:91
 msgid "Default"
-msgstr "默认"
+msgstr "По-умолчанию"
 
 #: source/gx/terminix/prefwindow.d:340
 msgid "New"
-msgstr "新建"
+msgstr "Новый"
 
 #: source/gx/terminix/prefwindow.d:353
 msgid "Edit"
-msgstr "编辑"
+msgstr "Изменить"
 
 #: source/gx/terminix/prefwindow.d:356
 msgid "Delete"
-msgstr "删除"
+msgstr "Удалить"
 
 #: source/gx/terminix/prefwindow.d:459
 msgid "Behavior"
-msgstr "行为"
+msgstr "Поведение"
 
 #: source/gx/terminix/prefwindow.d:465
 msgid "Prompt when creating a new session"
-msgstr "创建新会话时提示"
+msgstr "Подсказка при создании нового сеанса"
 
 #: source/gx/terminix/prefwindow.d:470
 msgid "Focus a terminal when the mouse moves over it"
-msgstr "在鼠标移入时激活终端"
+msgstr "Фокусировать терминал когда мышь над ним"
 
 #: source/gx/terminix/prefwindow.d:475
 msgid "Autohide the mouse pointer when typing"
-msgstr "打字时自动隐藏鼠标指针"
+msgstr "Скрывать указатель мыши при наборе"
 
 #: source/gx/terminix/prefwindow.d:481
 msgid "Send desktop notification on process complete"
-msgstr "进程完成时发送桌面通知"
+msgstr "Посылать извещение при окончании процесса"
 
 #: source/gx/terminix/prefwindow.d:489
 msgid "On new instance"
@@ -841,295 +825,290 @@ msgstr ""
 #: source/gx/terminix/prefwindow.d:492
 #, fuzzy
 msgid "Split Horizontal"
-msgstr "水平分割"
+msgstr "разделить горизонтально"
 
 #: source/gx/terminix/prefwindow.d:492
 #, fuzzy
 msgid "Split Vertical"
-msgstr "垂直分割"
+msgstr "разделить вертикально"
 
 #: source/gx/terminix/prefwindow.d:498
 #: source/gx/terminix/terminal/terminal.d:875
 #: source/gx/terminix/terminal/terminal.d:893
 msgid "Paste"
-msgstr "粘贴"
+msgstr "Вставить"
 
 #: source/gx/terminix/prefwindow.d:504
 msgid "Warn when attempting unsafe paste"
-msgstr "进行不安全复制时警告"
+msgstr "Предупреждать при небезопасной вставке"
 
 #: source/gx/terminix/prefwindow.d:509
 msgid "Strip first character of paste if comment or variable declaration"
-msgstr "如果粘贴内容为注释或变量声明则切除第一个字符"
+msgstr "Обрезать первый символ если комментарий или переменная"
 
 #: source/gx/terminix/prefwindow.d:514
 msgid "Appearance"
-msgstr "外观"
+msgstr "Оформление"
 
 #: source/gx/terminix/prefwindow.d:521
 msgid "Enable transparency, requires re-start"
-msgstr "开启透明终端，需要重启终端"
+msgstr "Включение прозрачности требует перезагрузки"
 
 #: source/gx/terminix/prefwindow.d:527
 msgid "Use small size for terminal titlebars"
-msgstr "使用较小的终端标题栏"
+msgstr "Использовать маленькие панели"
 
 #: source/gx/terminix/prefwindow.d:532
 msgid "Use a wide handle for splitters"
-msgstr "使用较宽的分割手柄"
+msgstr "Использование широких границ"
 
 #: source/gx/terminix/prefwindow.d:539
 msgid "Theme Variant"
-msgstr "主题变种"
+msgstr "Вариант темы"
 
 #: source/gx/terminix/prefwindow.d:544
 msgid "Light"
-msgstr "淡色"
+msgstr "Светлый"
 
 #: source/gx/terminix/prefwindow.d:545
 msgid "Dark"
-msgstr "深色"
+msgstr "Темный"
 
 #: source/gx/terminix/terminal/layout.d:28
 msgid "Layout Options"
-msgstr "布局选项"
+msgstr "Параметры оформления"
 
 #: source/gx/terminix/terminal/layout.d:28
 msgid "OK"
-msgstr "确定"
+msgstr ""
 
 #: source/gx/terminix/terminal/layout.d:28
 msgid "Cancel"
-msgstr "取消"
+msgstr "Отменить"
 
 #: source/gx/terminix/terminal/layout.d:43
 msgid "Active"
-msgstr "会话活动"
+msgstr "Активный"
 
 #: source/gx/terminix/terminal/layout.d:49
 msgid "Title"
-msgstr "标题"
+msgstr "Заголовок"
 
 #: source/gx/terminix/terminal/layout.d:57
 msgid "Session Load"
-msgstr "载入会话"
+msgstr "Загрузка сеанса"
 
 #: source/gx/terminix/terminal/layout.d:73
 msgid ""
 "Active options are always in effect and apply immediately.\n"
 "Session Load options only apply when loading a session file."
 msgstr ""
-"会话活动选项一直生效且立即应用。\n"
-"会话载入选项仅在载入会话文件时生效。"
 
 #: source/gx/terminix/terminal/search.d:117
 msgid "Search Options"
-msgstr "搜索选项"
+msgstr "Параметры поиска"
 
 #: source/gx/terminix/terminal/search.d:183
 msgid "Match case"
-msgstr "区分大小写"
+msgstr ""
 
 #: source/gx/terminix/terminal/search.d:184
 msgid "Match entire word only"
-msgstr "全字匹配"
+msgstr ""
 
 #: source/gx/terminix/terminal/search.d:185
 msgid "Match as regular expression"
-msgstr "使用正则表达式匹配"
+msgstr ""
 
 #: source/gx/terminix/terminal/search.d:186
 msgid "Wrap around"
-msgstr "换行"
+msgstr ""
 
 #: source/gx/terminix/terminal/terminal.d:323
 #: source/gx/terminix/terminal/terminal.d:741
 msgid "Terminal"
-msgstr "终端"
+msgstr "Терминал"
 
 #: source/gx/terminix/terminal/terminal.d:349
 #: source/gx/terminix/appwindow.d:401
 msgid "Close"
-msgstr "关闭"
+msgstr "Закрыть..."
 
 #: source/gx/terminix/terminal/terminal.d:358
 #: source/gx/terminix/terminal/terminal.d:772
-#, fuzzy
 msgid "Maximize"
-msgstr "最大化"
+msgstr "Распахнуть"
 
 #: source/gx/terminix/terminal/terminal.d:369
 msgid "Disable input synchronization for this terminal"
-msgstr "为此终端关闭输入同步"
+msgstr "Выключить синхронизацию ввода для этого терминала"
 
 #: source/gx/terminix/terminal/terminal.d:402
 msgid "Edit Profile"
-msgstr "编辑配置方案"
+msgstr "Изменить профиль"
 
 #: source/gx/terminix/terminal/terminal.d:531
 #: source/gx/terminix/appwindow.d:622
 msgid "There are processes that are still running, close anyway?"
-msgstr "仍有正在运行的进程，依然要关闭吗？"
+msgstr "Работает процесс. Все равно закрыть?"
 
 #: source/gx/terminix/terminal/terminal.d:590
 msgid "Save…"
-msgstr "保存…"
+msgstr "Сохранить..."
 
 #: source/gx/terminix/terminal/terminal.d:591
 msgid "Find…"
-msgstr "查找…"
+msgstr "Найти..."
 
 #: source/gx/terminix/terminal/terminal.d:592
 msgid "Layout Options…"
-msgstr "布局选项…"
+msgstr "Параметры оформления"
 
 #: source/gx/terminix/terminal/terminal.d:596
 msgid "Read-Only"
-msgstr "只读"
+msgstr "Только для чтения"
 
 #: source/gx/terminix/terminal/terminal.d:615
 msgid "Split Right"
-msgstr "向右分割"
+msgstr "Разделить справа"
 
 #: source/gx/terminix/terminal/terminal.d:619
 msgid "Split Down"
-msgstr "向下分割"
+msgstr "Разделить снизу"
 
 #: source/gx/terminix/terminal/terminal.d:769
 msgid "Restore"
-msgstr ""
+msgstr "Восстановить"
 
 #: source/gx/terminix/terminal/terminal.d:869
 msgid "Open Link"
-msgstr ""
+msgstr "Открыть ссылку"
 
 #: source/gx/terminix/terminal/terminal.d:870
 msgid "Copy Link Address"
-msgstr ""
+msgstr "Копировать адрес ссылки"
 
 #: source/gx/terminix/terminal/terminal.d:874
 #: source/gx/terminix/terminal/terminal.d:891
 msgid "Copy"
-msgstr "复制"
+msgstr "Копировать"
 
 #: source/gx/terminix/terminal/terminal.d:876
 #: source/gx/terminix/terminal/terminal.d:895
 msgid "Select All"
-msgstr "全选"
+msgstr "Выбрать всё"
 
 #: source/gx/terminix/terminal/terminal.d:1228
 msgid "Unexpected error occurred, no additional information available"
-msgstr "发生未知错误，无其他可用信息"
+msgstr ""
 
 #: source/gx/terminix/terminal/terminal.d:1234
 #, c-format
 msgid "Unexpected error occurred: %s"
-msgstr "发生未知错误：%s"
+msgstr ""
 
 #: source/gx/terminix/terminal/terminal.d:1550
 msgid "Save Terminal Output"
-msgstr "保存终端输出"
+msgstr "Сохранить вывод терминала"
 
 #: source/gx/terminix/terminal/terminal.d:1556
 msgid "All Text Files"
-msgstr "所有文本文件"
+msgstr "Все текстовые файлы"
 
 #: source/gx/terminix/terminal/terminal.d:1560
 #: source/gx/terminix/appwindow.d:669
 msgid "All Files"
-msgstr "所有文件"
+msgstr "Все файлы"
 
 #: source/gx/terminix/terminal/terminal.d:1863
 #, c-format
 msgid "The child process exited normally with status %d"
-msgstr "子进程以 %d 状态正常退出"
+msgstr ""
 
 #: source/gx/terminix/terminal/terminal.d:1864
 #, c-format
 msgid "The child process was aborted by signal %d."
-msgstr "子进程被 %d 信号中止。"
+msgstr ""
 
 #: source/gx/terminix/terminal/terminal.d:1865
 msgid "The child process was aborted."
-msgstr "子进程已被中止。"
+msgstr ""
 
 #: source/gx/terminix/terminal/terminal.d:1871
 msgid "Relaunch"
-msgstr "重新启动"
+msgstr "Перезапустить"
 
 #: source/gx/terminix/terminal/terminal.d:1911
 msgid "This command is asking for Administrative access to your computer"
-msgstr "命令正在请求计算机的管理员权限"
+msgstr ""
 
 #: source/gx/terminix/terminal/terminal.d:1912
 msgid "Copying commands from the internet can be dangerous. "
-msgstr "从互联网复制命令有一定危险性。"
+msgstr ""
 
 #: source/gx/terminix/terminal/terminal.d:1913
 msgid "Be sure you understand what each part of this command does."
-msgstr "你应当确认命令每个部分的作用。"
+msgstr ""
 
 #: source/gx/terminix/terminal/terminal.d:1915
 msgid "Don't Paste"
-msgstr "不要粘贴"
+msgstr "Не вставлять"
 
 #: source/gx/terminix/terminal/terminal.d:1916
 msgid "Paste Anyway"
-msgstr "依然粘贴"
+msgstr ""
 
 #: source/gx/terminix/cmdparams.d:73
 #, c-format
 msgid "Ignoring parameter working-directory as '%s' is not a directory"
-msgstr "忽略 working-directory 参数，因为“%s”不是目录"
+msgstr ""
 
 #: source/gx/terminix/cmdparams.d:82
 #, c-format
 msgid "Ignoring parameter session as '%s' does not exist"
-msgstr "忽略 session 参数，因为“%s”不存在"
+msgstr ""
 
 #: source/gx/terminix/cmdparams.d:91
 msgid ""
 "You cannot load a session and set a profile/working directory/execute "
 "command option, please choose one or the other"
 msgstr ""
-"你不能在载入会话时同时设置配置档案、工作目录及执行的命令行选项，请选择其中一"
-"个操作"
 
 #: source/gx/terminix/appwindow.d:181
 msgid "View session sidebar"
-msgstr "显示会话侧边栏"
+msgstr "Показать сеанс в боковой панели"
 
 #: source/gx/terminix/appwindow.d:193
 msgid "Create a new session"
-msgstr "创建会话"
+msgstr "Открыть новый сеанс"
 
 #: source/gx/terminix/appwindow.d:372
 msgid "Change Session Name"
-msgstr "更改会话名称"
+msgstr "Смена названия сеанса"
 
 #: source/gx/terminix/appwindow.d:372
 msgid "Enter a new name for the session"
-msgstr "为会话新建名称"
+msgstr "Введите имя сеанса"
 
 #: source/gx/terminix/appwindow.d:398
 msgid "Load…"
-msgstr "载入…"
+msgstr "Загрузить..."
 
 #: source/gx/terminix/appwindow.d:399
 msgid "Save"
-msgstr "保存"
+msgstr "Сохранить"
 
 #: source/gx/terminix/appwindow.d:400
 msgid "Save As…"
-msgstr "另存为…"
+msgstr "Сохранить как"
 
 #: source/gx/terminix/appwindow.d:405
 msgid "Name…"
-msgstr "名称…"
+msgstr "Имя..."
 
 #: source/gx/terminix/appwindow.d:406
 msgid "Synchronize Input"
-msgstr "同步输入"
+msgstr "Синхронизировать ввод"
 
 #: source/gx/terminix/appwindow.d:411
 msgid "GC"
@@ -1137,102 +1116,99 @@ msgstr ""
 
 #: source/gx/terminix/appwindow.d:665
 msgid "All JSON Files"
-msgstr "所有 JSON 文件"
+msgstr "Все jSON файлы"
 
 #: source/gx/terminix/appwindow.d:678
 #, c-format
 msgid "Filename '%s' does not exist"
-msgstr "文件名“%s”不存在"
+msgstr ""
 
 #: source/gx/terminix/appwindow.d:703
 msgid "Load Session"
-msgstr "载入会话"
+msgstr "Загрузить сеанс"
 
 #: source/gx/terminix/appwindow.d:716
 msgid "Could not load session due to unexpected error."
-msgstr "发生未知错误，无法载入会话。"
+msgstr ""
 
 #: source/gx/terminix/appwindow.d:716
 msgid "Error Loading Session"
-msgstr "载入会话出错"
+msgstr "Ошибка загрузки сеанса"
 
 #: source/gx/terminix/appwindow.d:731
 msgid "Save Session"
-msgstr "保存会话"
+msgstr "Сохранить сеанс"
 
 #: source/gx/terminix/appwindow.d:766
 #: data/pkg/desktop/com.gexperts.Terminix.desktop.in:3
 msgid "Terminix"
-msgstr "Terminix"
+msgstr ""
 
 #: source/gx/gtk/actions.d:23
 msgid "disabled"
-msgstr "已禁用"
+msgstr "выключен"
 
 #: source/app.d:41
 #, c-format
 msgid "Your GTK version is too old, you need at least GTK %d.%d.%d!"
-msgstr "你的 GTK 版本太老，需要至少 GTK %d.%d.%d！"
+msgstr "Ваш GTK слишком стар, нужно поставить версию %d.%d.%d!"
 
 #: source/app.d:61
 msgid "Unexpected exception occurred"
-msgstr "发生未预期错误"
+msgstr ""
 
 #: source/app.d:62
 msgid "Error: "
-msgstr "错误："
+msgstr "Ошибка:"
 
-# ******************
-# Nautilus extension
-# ******************
 #: data/nautilus/open-terminix.py:43
 msgid "Open in Terminix…"
-msgstr "使用 Terminix 打开…"
+msgstr "Открыть в Terminix…"
 
 #: data/nautilus/open-terminix.py:44
 #, python-format
 msgid "Open Terminix In %s"
-msgstr "在 %s 打开 Terminix"
+msgstr "Открыть Terminix в %s"
 
 #: data/nautilus/open-terminix.py:50
 msgid "Open Terminix Here…"
-msgstr "在此打开 Terminix…"
+msgstr "Открыть Terminix здесь..."
 
 #: data/nautilus/open-terminix.py:51
 msgid "Open Terminix In This Directory"
-msgstr "在此目录打开 Terminix"
+msgstr "Открыть terminix в этой папке"
 
 #: data/pkg/desktop/com.gexperts.Terminix.desktop.in:4
 msgid "A tiling terminal for Gnome"
-msgstr "GNOME 的平铺终端模拟器"
+msgstr "Тайлинг терминала в GNOME"
 
 #: data/pkg/desktop/com.gexperts.Terminix.desktop.in:10
 msgid "utilities-terminal"
-msgstr "utilities-terminal"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:15
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Application"
-msgstr "动作"
+msgstr "Действия"
 
 #: data/resources/ui/shortcuts.ui:19
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Open a new window"
-msgstr "新建窗口"
+msgstr "новое-окно"
 
 #: data/resources/ui/shortcuts.ui:25
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Open a new session"
-msgstr "创建会话"
+msgstr "Открыть новый сеанс"
 
 #: data/resources/ui/shortcuts.ui:31
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Open preferences"
-msgstr "首选项"
+msgstr "параметры"
 
 #: data/resources/ui/shortcuts.ui:37
 msgctxt "shortcut window"
@@ -1243,109 +1219,109 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Window"
-msgstr "新建窗口"
+msgstr "Новое окно"
 
 #: data/resources/ui/shortcuts.ui:49
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Toggle fullscreen mode"
-msgstr "全屏"
+msgstr "весь экран"
 
 #: data/resources/ui/shortcuts.ui:55
 #, fuzzy
 msgctxt "shortcut window"
 msgid "View session sidebar"
-msgstr "显示会话侧边栏"
+msgstr "Показать сеанс в боковой панели"
 
 #: data/resources/ui/shortcuts.ui:61
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to next session"
-msgstr "切换到会话 10"
+msgstr "на следующий сеанс"
 
 #: data/resources/ui/shortcuts.ui:67
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to previous session"
-msgstr "切换到上一个终端"
+msgstr "на предыдущий сеанс"
 
 #: data/resources/ui/shortcuts.ui:73
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 1"
-msgstr "切换到会话 1"
+msgstr "на-сеанс-1"
 
 #: data/resources/ui/shortcuts.ui:79
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 2"
-msgstr "切换到会话 2"
+msgstr "на-сеанс-2"
 
 #: data/resources/ui/shortcuts.ui:85
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 3"
-msgstr "切换到会话 3"
+msgstr "на-сеанс-3"
 
 #: data/resources/ui/shortcuts.ui:91
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 4"
-msgstr "切换到会话 4"
+msgstr "на-сеанс-4"
 
 #: data/resources/ui/shortcuts.ui:97
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 5"
-msgstr "切换到会话 5"
+msgstr "на-сеанс-5"
 
 #: data/resources/ui/shortcuts.ui:103
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 6"
-msgstr "切换到会话 6"
+msgstr "на-сеанс-6"
 
 #: data/resources/ui/shortcuts.ui:109
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 7"
-msgstr "切换到会话 7"
+msgstr "на-сеанс-7"
 
 #: data/resources/ui/shortcuts.ui:115
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 8"
-msgstr "切换到会话 8"
+msgstr "на-сеанс-8"
 
 #: data/resources/ui/shortcuts.ui:121
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 9"
-msgstr "切换到会话 9"
+msgstr "на-сеанс-9"
 
 #: data/resources/ui/shortcuts.ui:127
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to session 10"
-msgstr "切换到会话 10"
+msgstr "на-сеанс-0"
 
 #: data/resources/ui/shortcuts.ui:143
 #, fuzzy
 msgctxt "shortcut window"
 msgid "File"
-msgstr "所有文件"
+msgstr "Все файлы"
 
 #: data/resources/ui/shortcuts.ui:147
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Close the current session"
-msgstr "打开指定的会话"
+msgstr "Открыть специальную сессию"
 
 #: data/resources/ui/shortcuts.ui:153
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Save the current session"
-msgstr "打开指定的会话"
+msgstr "Открыть специальную сессию"
 
 #: data/resources/ui/shortcuts.ui:159
 msgctxt "shortcut window"
@@ -1356,7 +1332,7 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Load the current session"
-msgstr "载入会话"
+msgstr "Загрузить сеанс"
 
 #: data/resources/ui/shortcuts.ui:173
 msgctxt "shortcut window"
@@ -1367,25 +1343,25 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Resize the terminal up"
-msgstr "退出终端"
+msgstr "Выход их терминала"
 
 #: data/resources/ui/shortcuts.ui:183
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Resize the terminal down"
-msgstr "保持终端开启"
+msgstr "Держать терминал открытым"
 
 #: data/resources/ui/shortcuts.ui:189
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Resize the terminal left"
-msgstr "退出终端"
+msgstr "Выход их терминала"
 
 #: data/resources/ui/shortcuts.ui:195
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Resize the terminal right"
-msgstr "切换到终端 10"
+msgstr "на-терминал-направо"
 
 #: data/resources/ui/shortcuts.ui:203
 msgctxt "shortcut window"
@@ -1396,138 +1372,133 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to next terminal"
-msgstr "切换到下一个终端"
+msgstr "на-следующий-терминал"
 
 #: data/resources/ui/shortcuts.ui:213
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to previous terminal"
-msgstr "切换到上一个终端"
+msgstr "на-предыдущий-терминал"
 
 #: data/resources/ui/shortcuts.ui:219
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to the terminal up"
-msgstr "切换到终端 10"
+msgstr "на-терминал-вверх"
 
 #: data/resources/ui/shortcuts.ui:225
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to the terminal down"
-msgstr "切换到终端 10"
+msgstr "на-терминал-вниз"
 
 #: data/resources/ui/shortcuts.ui:231
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to the terminal left"
-msgstr "切换到终端 10"
+msgstr "на-терминал-влево"
 
 #: data/resources/ui/shortcuts.ui:237
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to the terminal right"
-msgstr "切换到终端 10"
+msgstr "на-терминал-направо"
 
 #: data/resources/ui/shortcuts.ui:243
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 1"
-msgstr "切换到终端 1"
+msgstr "на-терминал-1"
 
 #: data/resources/ui/shortcuts.ui:249
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 2"
-msgstr "切换到终端 2"
+msgstr "на-терминал-2"
 
 #: data/resources/ui/shortcuts.ui:255
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 3"
-msgstr "切换到终端 3"
+msgstr "на-терминал-3"
 
 #: data/resources/ui/shortcuts.ui:261
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 4"
-msgstr "切换到终端 4"
+msgstr "на-терминал-4"
 
 #: data/resources/ui/shortcuts.ui:267
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 5"
-msgstr "切换到终端 5"
+msgstr "на-терминал-5"
 
 #: data/resources/ui/shortcuts.ui:273
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 6"
-msgstr "切换到终端 6"
+msgstr "на-терминал-6"
 
 #: data/resources/ui/shortcuts.ui:279
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 7"
-msgstr "切换到终端 7"
+msgstr "на-терминал-7"
 
 #: data/resources/ui/shortcuts.ui:285
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 8"
-msgstr "切换到终端 8"
+msgstr "на-терминал-8"
 
 #: data/resources/ui/shortcuts.ui:291
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 9"
-msgstr "切换到终端 9"
+msgstr "на-терминал-9"
 
 #: data/resources/ui/shortcuts.ui:297
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Switch to terminal 10"
-msgstr "切换到终端 10"
+msgstr "на-терминал-0"
 
 #: data/resources/ui/shortcuts.ui:313
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Split"
-msgstr "向下分割"
+msgstr "Разделить снизу"
 
 #: data/resources/ui/shortcuts.ui:317
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Split horizontal"
-msgstr "水平分割"
+msgstr "разделить горизонтально"
 
 #: data/resources/ui/shortcuts.ui:323
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Split Vertical"
-msgstr "垂直分割"
+msgstr "разделить вертикально"
 
 #: data/resources/ui/shortcuts.ui:331 data/resources/ui/shortcuts.ui:335
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Find"
-msgstr "查找…"
+msgstr "Найти..."
 
 #: data/resources/ui/shortcuts.ui:341
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Find next"
-msgstr "查找下一个"
+msgstr "найти-следующий"
 
-# ***********************************************
-# Keyboard shortcuts to the end, these are shown
-# in the Shortcut preferences and in the future
-# the shortcut overview if available in Gnome 3.20
-# ***********************************************
 #: data/resources/ui/shortcuts.ui:347
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Find previous"
-msgstr "查找上一个"
+msgstr "найти-предыдущий"
 
 #: data/resources/ui/shortcuts.ui:355
 msgctxt "shortcut window"
@@ -1538,19 +1509,19 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Copy"
-msgstr "复制"
+msgstr "Копировать"
 
 #: data/resources/ui/shortcuts.ui:365
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Paste"
-msgstr "粘贴"
+msgstr "Вставить"
 
 #: data/resources/ui/shortcuts.ui:371
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Select all"
-msgstr "全选"
+msgstr "Выбрать всё"
 
 #: data/resources/ui/shortcuts.ui:379
 msgctxt "shortcut window"
@@ -1571,7 +1542,7 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Zoom normal size"
-msgstr "正常缩放"
+msgstr "норма"
 
 #: data/resources/ui/shortcuts.ui:403
 msgctxt "shortcut window"
@@ -1582,48 +1553,34 @@ msgstr ""
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Save terminal contents"
-msgstr "保存终端输出"
+msgstr "Сохранить вывод терминала"
 
 #: data/resources/ui/shortcuts.ui:413
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Close terminal"
-msgstr "终端"
+msgstr "терминал"
 
 #: data/resources/ui/shortcuts.ui:419
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Maximize terminal"
-msgstr "退出终端"
+msgstr "Выход их терминала"
 
 #: data/resources/ui/shortcuts.ui:425
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Current profile preferences"
-msgstr "配置方案首选项"
+msgstr "параметры профиля"
 
 #: data/resources/ui/shortcuts.ui:431
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Toggle read only"
-msgstr "只读"
+msgstr "для чтения"
 
 #: data/resources/ui/shortcuts.ui:437
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Layout options"
-msgstr "布局选项"
-
-#~ msgid "Enable the menu accelerator key (F10 by default)"
-#~ msgstr "启用菜单快捷键（默认为 F10）"
-
-#~ msgid "Enter Custom Title"
-#~ msgstr "输入自定义标题"
-
-#~ msgid ""
-#~ "Enter a new title to override the one specified by the profile. To reset "
-#~ "it to the profile setting, leave it blank."
-#~ msgstr "输入新标题以替换配置方案指定的标题。留空以重置为配置方案默认值。"
-
-#~ msgid "Title…"
-#~ msgstr "标题…"
+msgstr "Параметры оформления"
